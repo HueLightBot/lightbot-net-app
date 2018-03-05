@@ -10,6 +10,11 @@ using System.Windows.Forms;
 using Q42.HueApi;
 using Q42.HueApi.Interfaces;
 using System.Threading;
+using Q42.HueApi.Converters;
+using Q42.HueApi.ColorConverters;
+using Q42.HueApi.ColorConverters.Original;
+using PubSub;
+using ServiceStack.Redis;
 
 namespace lightbot_net_app
 {
@@ -81,11 +86,8 @@ namespace lightbot_net_app
             }
 
             groups = await client.GetGroupsAsync();
-            List<string> groupNames = new List<string>();
-            foreach (Q42.HueApi.Models.Groups.Group group in groups)
-            {
-                groupNames.Add(group.Name);
-            }
+            List<string> groupNames =  groups.Select(x => x.Name).ToList();
+
             comboBox6.DataSource = groupNames;
             
             //var command = new LightCommand();
@@ -138,7 +140,46 @@ namespace lightbot_net_app
 
         private void pubsubRunner(ILocalHueClient client)
         {
+            Console.WriteLine("Started pubsub");
+
+            var clientsManager = new PooledRedisClientManager("huelightbot.com");
+            var redisPubSub = new RedisPubSubServer(clientsManager, "channel-1", "channel-2")
+            {
+                OnMessage = (channel, msg) => HandleOnMessage(channel,msg)
+            }.Start();
+
+
             return;
+        }
+
+        private void HandleOnMessage(string channel, string msg)
+        {
+            Console.WriteLine("Received '{0}' from '{1}'", msg, channel)
+        }
+
+
+        private void SetHexColor(string hex)
+        {
+            var command = new LightCommand();
+            command.SetColor(new RGBColor(hex));
+
+            client.SendCommandAsync(command);
+        }
+
+        private void SetLightsOff()
+        {
+            var command = new LightCommand();
+            command.TurnOff();
+
+            client.SendCommandAsync(command);
+        }
+
+        private void SetLightsOn()
+        {
+            var command = new LightCommand();
+            command.TurnOn();
+
+            client.SendCommandAsync(command);
         }
     }
 }
