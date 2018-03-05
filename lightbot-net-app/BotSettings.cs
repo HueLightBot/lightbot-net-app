@@ -8,10 +8,6 @@ namespace lightbot_net_app
 {
     class BotSettings
     {
-        public string Nickname { get; set; }
-        public string OAuthPassword { get; set; }
-        public int Port { get; set; }
-        public string IRCServer { get; set; }
         public int CheerFloor { get; set; }
         public int HUEGroup { get; set; }
         public string Channel { get; set; }

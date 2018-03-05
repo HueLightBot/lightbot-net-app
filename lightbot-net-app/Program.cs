@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Q42.HueApi;
+using Q42.HueApi.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -11,12 +13,12 @@ namespace lightbot_net_app
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
-        [STAThread]
+
         static void Main()
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+            Application.Run(new Form1());            
         }
     }
 }
