@@ -79,10 +79,7 @@
     </Reference>
     <Reference Include="Q42.HueApi.ColorConverters, Version=3.6.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Q42.HueApi.ColorConverters.3.6.0\lib\netstandard1.1\Q42.HueApi.ColorConverters.dll</HintPath>
-<<<<<<< HEAD
-=======
       <Private>True</Private>
->>>>>>> Additional UI changes and fianl UI changes for V2 alpha
     </Reference>
     <Reference Include="ServiceStack.Common, Version=5.0.0.0, Culture=neutral, PublicKeyToken=02c12cbda47e6587, processorArchitecture=MSIL">
       <HintPath>..\packages\ServiceStack.Common.5.0.2\lib\net45\ServiceStack.Common.dll</HintPath>

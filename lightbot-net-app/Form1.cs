@@ -7,14 +7,10 @@ using Q42.HueApi;
 using Q42.HueApi.Interfaces;
 using System.Threading;
 using Q42.HueApi.Converters;
-<<<<<<< HEAD
 using Q42.HueApi.ColorConverters;
 using Q42.HueApi.ColorConverters.Original;
 using PubSub;
 using ServiceStack.Redis;
-=======
-using Q42.HueApi.ColorConverters.Original;
->>>>>>> Additional UI changes and fianl UI changes for V2 alpha
 
 namespace lightbot_net_app
 {
@@ -183,10 +179,9 @@ namespace lightbot_net_app
             return;
         }
 
-<<<<<<< HEAD
         private void HandleOnMessage(string channel, string msg)
         {
-            Console.WriteLine("Received '{0}' from '{1}'", msg, channel)
+            Console.WriteLine("Received '{0}' from '{1}'", msg, channel);
         }
 
 
@@ -212,8 +207,8 @@ namespace lightbot_net_app
             command.TurnOn();
 
             client.SendCommandAsync(command);
-=======
-        private void contextMenuStrip1_Opening(object sender, CancelEventArgs e)
+        }
+       private void contextMenuStrip1_Opening(object sender, CancelEventArgs e)
         {
 
         }
@@ -339,7 +334,6 @@ namespace lightbot_net_app
         private void textBox6_TextChanged(object sender, EventArgs e)
         {
             
->>>>>>> Additional UI changes and fianl UI changes for V2 alpha
         }
     }
 }
