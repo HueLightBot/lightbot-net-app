@@ -1,20 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Q42.HueApi;
 using Q42.HueApi.Interfaces;
 using System.Threading;
 using Q42.HueApi.Converters;
+<<<<<<< HEAD
 using Q42.HueApi.ColorConverters;
 using Q42.HueApi.ColorConverters.Original;
 using PubSub;
 using ServiceStack.Redis;
+=======
+using Q42.HueApi.ColorConverters.Original;
+>>>>>>> Additional UI changes and fianl UI changes for V2 alpha
 
 namespace lightbot_net_app
 {
@@ -28,7 +28,6 @@ namespace lightbot_net_app
         public Form1()
         {
             InitializeComponent();
-
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -38,7 +37,8 @@ namespace lightbot_net_app
 
         private void notifyIcon1_MouseDoubleClick(object sender, MouseEventArgs e)
         {
-            if (this.Visible == false) {
+            if (this.Visible == false)
+            {
                 this.ShowDialog();
             }
         }
@@ -59,11 +59,20 @@ namespace lightbot_net_app
 
             /// Comboboxes
             comboBox1.Text = Properties.Settings.Default.largeCheerAction;
-            comboBox2.SelectedText = Properties.Settings.Default.primeSubAction;
+            comboBox2.Text = Properties.Settings.Default.primeSubAction;
             comboBox3.Text = Properties.Settings.Default.Tier1SubAction;
             comboBox4.Text = Properties.Settings.Default.Tier2SubAction;
             comboBox5.Text = Properties.Settings.Default.Tier3SubAction;
 
+            exitToolStripMenuItem.Click += new EventHandler(exitToolStripMenuItem_Click);
+
+        }
+
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Close();
+            Application.Exit();
+            return;
         }
 
         private void label10_Click(object sender, EventArgs e)
@@ -78,21 +87,30 @@ namespace lightbot_net_app
             if (Properties.Settings.Default.appkey != "")
             {
                 client.Initialize(Properties.Settings.Default.appkey);
-            } else
-            {
-                var appKey = await client.RegisterAsync("HueLightBot", Environment.MachineName);
-                Properties.Settings.Default.appkey = appKey;
-                Properties.Settings.Default.Save();
+                logEvent("Connected with previous Hue Auth");
             }
+            else
+            {
+                string messageBoxText = "Press the button on your Hue bridge and then click Ok.";
+                string caption = "Action Required";
+                MessageBoxButtons button = MessageBoxButtons.OK;
+                DialogResult result = MessageBox.Show(messageBoxText, caption, button);
 
+                switch (result)
+                {
+                    case DialogResult.OK:
+                        var appKey = await client.RegisterAsync("HueLightBot", Environment.MachineName);
+                        Properties.Settings.Default.appkey = appKey;
+                        Properties.Settings.Default.Save();
+                        logEvent("Connected with new Hue Auth");
+                        break;
+                }
+            }
+            
             groups = await client.GetGroupsAsync();
             List<string> groupNames =  groups.Select(x => x.Name).ToList();
 
             comboBox6.DataSource = groupNames;
-            
-            //var command = new LightCommand();
-            //command.Effect = Effect.None;
-            //await client.SendCommandAsync(command, new List<string> { "4" });
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -138,6 +156,19 @@ namespace lightbot_net_app
             }
         }
 
+        protected override void OnFormClosing(FormClosingEventArgs e)
+        {
+            if (e.CloseReason == CloseReason.WindowsShutDown)
+            {
+                return;
+            }
+            else
+            {
+                this.Visible = false;
+                e.Cancel = true;
+            }
+        }
+
         private void pubsubRunner(ILocalHueClient client)
         {
             Console.WriteLine("Started pubsub");
@@ -152,6 +183,7 @@ namespace lightbot_net_app
             return;
         }
 
+<<<<<<< HEAD
         private void HandleOnMessage(string channel, string msg)
         {
             Console.WriteLine("Received '{0}' from '{1}'", msg, channel)
@@ -180,6 +212,134 @@ namespace lightbot_net_app
             command.TurnOn();
 
             client.SendCommandAsync(command);
+=======
+        private void contextMenuStrip1_Opening(object sender, CancelEventArgs e)
+        {
+
+        }
+
+        private Q42.HueApi.Models.Groups.Group getSelectedGroup()
+        {
+            Q42.HueApi.Models.Groups.Group selectedGroup = null;
+            foreach (Q42.HueApi.Models.Groups.Group group in groups)
+            {
+                string g = comboBox6.SelectedItem.ToString();
+                Console.WriteLine(g);
+                if (group.Name.Equals(g, StringComparison.Ordinal))
+                {
+                    selectedGroup = group;
+                    break;
+                }
+            }
+            return selectedGroup;
+        }
+
+        private async void button5_Click(object sender, EventArgs e)
+        {
+            // Color Loop
+            if (await client.CheckConnection() == true)
+            {
+                var commandLoopOn = new LightCommand();
+                commandLoopOn.Effect = Effect.ColorLoop;
+                var commandLoopOff = new LightCommand();
+                commandLoopOff.Effect = Effect.None;
+                Q42.HueApi.Models.Groups.Group selectedGroup = getSelectedGroup();
+
+                await client.SendCommandAsync(commandLoopOn, selectedGroup.Lights);
+                System.Threading.Thread.Sleep(20000);
+                await client.SendCommandAsync(commandLoopOff, selectedGroup.Lights);
+                logEvent("Looped Lights via UI");
+            }
+        }
+
+        private async void button6_Click(object sender, EventArgs e)
+        {
+            // Blink
+            if (await client.CheckConnection() == true)
+            {
+                var command = new LightCommand();
+                command.Alert = Alert.Multiple;
+                Q42.HueApi.Models.Groups.Group selectedGroup = getSelectedGroup();
+
+                await client.SendCommandAsync(command, selectedGroup.Lights);
+                logEvent("Blinked Lights via UI");
+            }
+        }
+
+        private async void button7_Click(object sender, EventArgs e)
+        {
+            // Custom Color
+            if (colorDialog1.ShowDialog() == DialogResult.OK)
+            {
+                if (await client.CheckConnection() == true)
+                {
+                    var command = new LightCommand();
+                    Q42.HueApi.ColorConverters.RGBColor color = new Q42.HueApi.ColorConverters.RGBColor();
+                    color.R = colorDialog1.Color.R;
+                    color.G = colorDialog1.Color.G;
+                    color.B = colorDialog1.Color.B;
+                    command.SetColor(color);
+                    Q42.HueApi.Models.Groups.Group selectedGroup = getSelectedGroup();
+
+                    await client.SendCommandAsync(command, selectedGroup.Lights);
+                    logEvent("Changed color via UI");
+                }
+            }
+        }
+
+        private async void button8_Click(object sender, EventArgs e)
+        {
+            // Lights On
+            if (await client.CheckConnection() == true)
+            {
+                var command = new LightCommand();
+                command.TurnOn();
+                Q42.HueApi.Models.Groups.Group selectedGroup = getSelectedGroup();
+
+                await client.SendCommandAsync(command, selectedGroup.Lights);
+                logEvent("Turned On Lights via UI");
+            }
+        }
+
+        private async void button9_Click(object sender, EventArgs e)
+        {
+            // Lights Off
+            if (await client.CheckConnection() == true)
+            {
+                var command = new LightCommand();
+                command.TurnOff();
+                Q42.HueApi.Models.Groups.Group selectedGroup = getSelectedGroup();
+
+                await client.SendCommandAsync(command, selectedGroup.Lights);
+                logEvent("Turned Off Lights via UI");
+            }
+        }
+
+        private void eventLog1_EntryWritten(object sender, System.Diagnostics.EntryWrittenEventArgs e)
+        {
+            if (textBox6.InvokeRequired)
+            {
+                textBox6.Invoke(new Action(() => { textBox6.AppendText(e.Entry.Message + Environment.NewLine); }));
+                textBox6.Update();
+            }
+            else
+            {
+                textBox6.AppendText(e.Entry.Message + Environment.NewLine);
+                textBox6.Update();
+            }
+        }
+
+        private void logEvent(string eventText)
+        {
+            eventLog1.WriteEntry(eventText);
+            textBox6.Invoke(new Action(() => { textBox6.AppendText(eventText + Environment.NewLine); }));
+            textBox6.Update();
+        }
+
+        private void textBox6_TextChanged(object sender, EventArgs e)
+        {
+            
+>>>>>>> Additional UI changes and fianl UI changes for V2 alpha
         }
     }
 }
