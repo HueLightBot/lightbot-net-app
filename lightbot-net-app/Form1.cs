@@ -11,6 +11,8 @@ using Q42.HueApi.ColorConverters;
 using Q42.HueApi.ColorConverters.Original;
 using PubSub;
 using ServiceStack.Redis;
+using Newtonsoft.Json;
+using System.Text.RegularExpressions;
 
 namespace lightbot_net_app
 {
@@ -21,6 +23,10 @@ namespace lightbot_net_app
         public ILocalHueClient client;
         public IReadOnlyCollection<Q42.HueApi.Models.Groups.Group> groups;
         public System.Threading.Thread pubsubThread;
+
+        private IRedisPubSubServer redisPubSub;
+
+
         public Form1()
         {
             InitializeComponent();
@@ -149,6 +155,8 @@ namespace lightbot_net_app
             {
                 pubsubThread = (new Thread(() => pubsubRunner(client)));
                 pubsubThread.Start();
+
+                //HandleOnMessage("geoff", "{\"type\": \"cheer\", \"nick\": \"aetaric\", \"amount\": 200, \"message\": \"cheer200 this is a test #ff0000\"}");
             }
         }
 
@@ -169,21 +177,83 @@ namespace lightbot_net_app
         {
             Console.WriteLine("Started pubsub");
 
-            var clientsManager = new PooledRedisClientManager("huelightbot.com");
-            var redisPubSub = new RedisPubSubServer(clientsManager, "channel-1", "channel-2")
+            var clientsManager = new PooledRedisClientManager("3rogK4bOMIAFDSJ8P0FqjNYxwDIk6UatbbMlUVV7uySHnPhxhrh0IFIwnf3ZEjo@pubsub.huelightbot.com");
+            
+            redisPubSub = new RedisPubSubServer(clientsManager, textBox1.Text)
             {
-                OnMessage = (channel, msg) => HandleOnMessage(channel,msg)
+                OnMessage = (channel, msg) => HandleOnMessage(channel, msg),
+                OnError = (ex) => HandleOnError(ex)
             }.Start();
-
 
             return;
         }
 
-        private void HandleOnMessage(string channel, string msg)
+        private void HandleOnError(Exception ex)
         {
-            Console.WriteLine("Received '{0}' from '{1}'", msg, channel);
+            logEvent(String.Format("Received '{0}' error from pubsub", ex.Message));
+            
         }
 
+
+        private void HandleOnMessage(string channel, string msg)
+        {
+            logEvent(String.Format("Received '{0}' from pubsub", msg, channel));
+
+            if (msg.Contains("cheer"))
+            {
+                CheerVO cheer = JsonConvert.DeserializeObject<CheerVO>(msg);
+
+                if (cheer.amount >= Properties.Settings.Default.cheerFloor)
+                {
+
+                    foreach (Match match in Regex.Matches(cheer.message, @"#([0-9a-fA-F]{6})"))
+                    {
+                        if (!String.IsNullOrEmpty(match.Value))
+                            SetHexColor(match.Value);
+                    }
+
+                }
+                else if(cheer.amount >= Properties.Settings.Default.largeCheerFloor && Properties.Settings.Default.largeCheer)
+                {
+                    if (Properties.Settings.Default.largeCheerAction == "Blink")
+                    {
+                        DoBlink();
+                    }
+                    else
+                    {
+                        DoColorLoop();
+                    }
+                      
+                }
+                else if(cheer.amount >= Properties.Settings.Default.offFloor && cheer.message.Contains("!off") && Properties.Settings.Default.onOff)
+                {
+                    SetLightsOff();
+                }
+                else if(cheer.amount >= Properties.Settings.Default.onFloor && cheer.message.Contains("!on") && Properties.Settings.Default.onOff)
+                {
+                    SetLightsOn();
+                }
+
+            }
+        }
+
+        private void DoColorLoop()
+        {
+            var command = new LightCommand();
+            command.Effect = Effect.ColorLoop;
+
+            client.SendCommandAsync(command);
+            logEvent("Doing a Color Loop");
+        }
+
+        private void DoBlink()
+        {
+            var command = new LightCommand();
+            //command.Alert = Alerts.Once;
+
+            client.SendCommandAsync(command);
+            logEvent("Doing a Color Loop");
+        }
 
         private void SetHexColor(string hex)
         {
@@ -191,6 +261,7 @@ namespace lightbot_net_app
             command.SetColor(new RGBColor(hex));
 
             client.SendCommandAsync(command);
+            logEvent("Setting Lights to " + hex);
         }
 
         private void SetLightsOff()
@@ -328,12 +399,27 @@ namespace lightbot_net_app
         {
             eventLog1.WriteEntry(eventText);
             textBox6.Invoke(new Action(() => { textBox6.AppendText(eventText + Environment.NewLine); }));
-            textBox6.Update();
         }
 
         private void textBox6_TextChanged(object sender, EventArgs e)
         {
             
         }
+    }
+
+
+    public class CheerVO
+    {
+        public string type { get; set; }
+        public string nick { get; set; }
+        public int amount { get; set; }
+        public string message { get; set; }
+    }
+
+    public class SubVO
+    {
+        public string type { get; set; }
+        public string nick { get; set; }
+        public string message { get; set; }
     }
 }
