@@ -237,31 +237,43 @@ namespace lightbot_net_app
             }
         }
 
-        private void DoColorLoop()
+        private async void DoColorLoop()
         {
-            var command = new LightCommand();
+            if (await client.CheckConnection() == true)
+            {
+                var command = new LightCommand();
             command.Effect = Effect.ColorLoop;
+            Q42.HueApi.Models.Groups.Group selectedGroup = getSelectedGroup();
 
-            client.SendCommandAsync(command);
+            await client.SendCommandAsync(command, selectedGroup.Lights);
             logEvent("Doing a Color Loop");
+            }
         }
 
-        private void DoBlink()
+        private async void DoBlink()
         {
-            var command = new LightCommand();
-            //command.Alert = Alerts.Once;
+            if (await client.CheckConnection() == true)
+            {
+                var command = new LightCommand();
+                //command.Alert = Alerts.Once;
+                Q42.HueApi.Models.Groups.Group selectedGroup = getSelectedGroup();
 
-            client.SendCommandAsync(command);
-            logEvent("Doing a Color Loop");
+                await client.SendCommandAsync(command, selectedGroup.Lights);
+                logEvent("Doing a Color Loop");
+            }
         }
 
-        private void SetHexColor(string hex)
+        private async void SetHexColor(string hex)
         {
-            var command = new LightCommand();
-            command.SetColor(new RGBColor(hex));
+            if (await client.CheckConnection() == true)
+            {
+                var command = new LightCommand();
+                command.SetColor(new RGBColor(hex));
+                Q42.HueApi.Models.Groups.Group selectedGroup = getSelectedGroup();
 
-            client.SendCommandAsync(command);
-            logEvent("Setting Lights to " + hex);
+                await client.SendCommandAsync(command, selectedGroup.Lights);
+                logEvent("Setting Lights to " + hex);
+            }
         }
 
         private void SetLightsOff()
