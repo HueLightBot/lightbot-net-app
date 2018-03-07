@@ -68,6 +68,11 @@ namespace lightbot_net_app
             comboBox4.Text = Properties.Settings.Default.Tier2SubAction;
             comboBox5.Text = Properties.Settings.Default.Tier3SubAction;
 
+            tier1subColorCheckBox.Checked = Properties.Settings.Default.Tier1ChangeColor;
+            tier2SubComboBox.Checked = Properties.Settings.Default.Tier2ChangeColor;
+            tier3ColorBox.Checked = Properties.Settings.Default.Tier3ChangeColor;
+            primeSubColorBox.Checked = Properties.Settings.Default.PrimeSubChangeColor;
+
             exitToolStripMenuItem.Click += new EventHandler(exitToolStripMenuItem_Click);
 
         }
@@ -146,8 +151,6 @@ namespace lightbot_net_app
             Properties.Settings.Default.Tier3ChangeColor = tier3ColorBox.Checked;
             Properties.Settings.Default.PrimeSubChangeColor = primeSubColorBox.Checked;
 
-
-
             Properties.Settings.Default.Save();
         }
 
@@ -202,54 +205,27 @@ namespace lightbot_net_app
 
         private void HandleOnError(Exception ex)
         {
+#if DEBUG
             logEvent(string.Format("Received '{0}' error from pubsub", ex.Message));
-            
+#endif   
         }
 
 
         private void HandleOnMessage(string channel, string msg)
         {
+#if DEBUG
             logEvent(string.Format("Received '{0}' from pubsub", msg, channel));
-
+#endif
             if (msg.Contains("cheer"))
             {
                 CheerVO cheer = JsonConvert.DeserializeObject<CheerVO>(msg);
-
-                if (cheer.amount >= Properties.Settings.Default.cheerFloor)
-                {
-
-                    foreach (Match match in Regex.Matches(cheer.message, @"#([0-9a-fA-F]{6})"))
-                    {
-                        if (!string.IsNullOrEmpty(match.Value))
-                            SetHexColor(match.Value);
-                    }
-
-                }
-                else if(cheer.amount >= Properties.Settings.Default.largeCheerFloor && Properties.Settings.Default.largeCheer)
-                {
-                    if (Properties.Settings.Default.largeCheerAction == "Blink")
-                    {
-                        DoBlink();
-                    }
-                    else
-                    {
-                        DoColorLoop();
-                    }
-                      
-                }
-                else if(cheer.amount >= Properties.Settings.Default.offFloor && cheer.message.Contains("!off") && Properties.Settings.Default.onOff)
-                {
-                    SetLightsOff();
-                }
-                else if(cheer.amount >= Properties.Settings.Default.onFloor && cheer.message.Contains("!on") && Properties.Settings.Default.onOff)
-                {
-                    SetLightsOn();
-                }
+                HandleAction(cheer);
 
             }
             else if (msg.Contains("sub"))
             {
                SubVO subVO = JsonConvert.DeserializeObject<SubVO>(msg);
+                HandleAction(subVO);
             }
             else if (msg.Contains("command"))
             {
@@ -259,6 +235,112 @@ namespace lightbot_net_app
             {
                 // wtf
             }
+        }
+
+        private void HandleAction(CheerVO cheer)
+        {
+            if (cheer.amount >= Properties.Settings.Default.cheerFloor)
+            {
+
+                foreach (Match match in Regex.Matches(cheer.message, @"#([0-9a-fA-F]{6})"))
+                {
+                    if (!string.IsNullOrEmpty(match.Value))
+                        SetHexColor(match.Value);
+                }
+
+            }
+            else if (cheer.amount >= Properties.Settings.Default.largeCheerFloor && Properties.Settings.Default.largeCheer)
+            {
+                if (Properties.Settings.Default.largeCheerAction == "Blink")
+                {
+                    DoBlink();
+                }
+                else
+                {
+                    DoColorLoop();
+                }
+
+            }
+            else if (cheer.amount >= Properties.Settings.Default.offFloor && cheer.message.Contains("!off") && Properties.Settings.Default.onOff)
+            {
+                SetLightsOff();
+            }
+            else if (cheer.amount >= Properties.Settings.Default.onFloor && cheer.message.Contains("!on") && Properties.Settings.Default.onOff)
+            {
+                SetLightsOn();
+            }
+        }
+
+        private void HandleAction(SubVO subVO)
+        {
+            SubTiers subTier = SubTiers.Unassigned;
+            switch (subVO.type.ToLower())
+            {
+                case "prime":
+                    subTier = SubTiers.Prime;
+                    break;
+                case "1000":
+                    subTier = SubTiers.Tier1;
+                    break;
+                case "2000":
+                    subTier = SubTiers.Tier2;
+                    break;
+                case "3000":
+                    subTier = SubTiers.Tier3;
+                    break;
+            }
+
+            bool doColors = HandleSubAction(subTier);
+            if (doColors)
+            {
+                foreach (Match match in Regex.Matches(subVO.message, @"#([0-9a-fA-F]{6})"))
+                {
+                    if (!string.IsNullOrEmpty(match.Value))
+                        SetHexColor(match.Value);
+                }
+            }
+        }
+
+        private bool HandleSubAction(SubTiers subTier)
+        {
+
+            bool doColorLoop = false;
+            bool doBlink = false;
+            bool doChangeColors = false;
+
+            if (subTier == SubTiers.Tier1)
+            {
+                doColorLoop = Properties.Settings.Default.Tier1SubAction.ToLower() == "loop";
+                doBlink = Properties.Settings.Default.Tier1SubAction.ToLower() == "blink";
+                doChangeColors = Properties.Settings.Default.Tier1ChangeColor;
+            }
+            else if (subTier == SubTiers.Tier2)
+            {
+                doColorLoop = Properties.Settings.Default.Tier2SubAction.ToLower() == "loop";
+                doBlink = Properties.Settings.Default.Tier2SubAction.ToLower() == "blink";
+                doChangeColors = Properties.Settings.Default.Tier2ChangeColor;
+            }
+            else if (subTier == SubTiers.Tier3)
+            {
+                doColorLoop = Properties.Settings.Default.Tier3SubAction.ToLower() == "loop";
+                doBlink = Properties.Settings.Default.Tier3SubAction.ToLower() == "blink";
+                doChangeColors = Properties.Settings.Default.Tier3ChangeColor;
+            }
+            else if (subTier == SubTiers.Prime)
+            {
+                doColorLoop = Properties.Settings.Default.primeSubAction.ToLower() == "loop";
+                doBlink = Properties.Settings.Default.primeSubAction.ToLower() == "blink";
+                doChangeColors = Properties.Settings.Default.PrimeSubChangeColor;
+            }
+
+
+            if (doColorLoop) DoColorLoop();
+            if (doBlink) DoBlink();
+
+
+            return doChangeColors;
+
+
         }
 
         private async void DoColorLoop()
@@ -472,5 +554,14 @@ namespace lightbot_net_app
         public bool mod { get; set; }
         public bool sub { get; set; }
         public string message { get; set; }
+    }
+
+    public enum SubTiers
+    {
+        Unassigned = -1,
+        Prime = 0,
+        Tier1 = 1000,
+        Tier2 = 2000,
+        Tier3 = 3000,
     }
 }
