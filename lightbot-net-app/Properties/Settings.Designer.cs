@@ -12,7 +12,7 @@ namespace lightbot_net_app.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "14.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "15.3.0.0")]
     internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
         
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
@@ -248,6 +248,54 @@ namespace lightbot_net_app.Properties {
             }
             set {
                 this["colorloopMods"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool Tier1ChangeColor {
+            get {
+                return ((bool)(this["Tier1ChangeColor"]));
+            }
+            set {
+                this["Tier1ChangeColor"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool Tier2ChangeColor {
+            get {
+                return ((bool)(this["Tier2ChangeColor"]));
+            }
+            set {
+                this["Tier2ChangeColor"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool Tier3ChangeColor {
+            get {
+                return ((bool)(this["Tier3ChangeColor"]));
+            }
+            set {
+                this["Tier3ChangeColor"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool PrimeSubChangeColor {
+            get {
+                return ((bool)(this["PrimeSubChangeColor"]));
+            }
+            set {
+                this["PrimeSubChangeColor"] = value;
             }
         }
     }

@@ -141,6 +141,12 @@ namespace lightbot_net_app
             Properties.Settings.Default.Tier1SubAction = comboBox3.Text;
             Properties.Settings.Default.Tier2SubAction = comboBox4.Text;
             Properties.Settings.Default.Tier3SubAction = comboBox5.Text;
+            Properties.Settings.Default.Tier1ChangeColor = tier1subColorCheckBox.Checked;
+            Properties.Settings.Default.Tier2ChangeColor = tier2SubComboBox.Checked;
+            Properties.Settings.Default.Tier3ChangeColor = tier3ColorBox.Checked;
+            Properties.Settings.Default.PrimeSubChangeColor = primeSubColorBox.Checked;
+
+
 
             Properties.Settings.Default.Save();
         }
@@ -243,7 +249,7 @@ namespace lightbot_net_app
             }
             else if (msg.Contains("sub"))
             {
-                // sub logic
+               SubVO subVO = JsonConvert.DeserializeObject<SubVO>(msg);
             }
             else if (msg.Contains("command"))
             {
