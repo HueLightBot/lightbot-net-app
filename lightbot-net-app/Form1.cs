@@ -229,11 +229,69 @@ namespace lightbot_net_app
             }
             else if (msg.Contains("command"))
             {
-                // command logic
+                CommandVO commandVO = JsonConvert.DeserializeObject<CommandVO>(msg);
+                HandleAction(commandVO);
             }
             else
             {
                 // wtf
+            }
+        }
+
+        private void HandleAction(CommandVO commandVO)
+        {
+            HandleSetLightsCommand(commandVO);
+            HandleColorLoop(commandVO);
+        }
+
+        private void HandleSetLightsCommand(CommandVO commandVO)
+        {
+            if (commandVO.message.Contains("!setlights"))
+            {
+                if (commandVO.mod)
+                {
+                    if (Properties.Settings.Default.setlightsMods)
+                    {
+                        foreach (Match match in Regex.Matches(commandVO.message, @"#([0-9a-fA-F]{6})"))
+                        {
+                            if (!string.IsNullOrEmpty(match.Value))
+                                SetHexColor(match.Value);
+                        }
+                    }
+                }
+                else if (commandVO.sub)
+                {
+                    if (Properties.Settings.Default.setlightsSubs)
+                    {
+                        foreach (Match match in Regex.Matches(commandVO.message, @"#([0-9a-fA-F]{6})"))
+                        {
+                            if (!string.IsNullOrEmpty(match.Value))
+                                SetHexColor(match.Value);
+                        }
+                    }
+                }
+
+            }
+        }
+        private void HandleColorLoop(CommandVO commandVO)
+        {
+            if (commandVO.message.Contains("!colorloop"))
+            {
+                if (commandVO.mod)
+                {
+                    if (Properties.Settings.Default.colorloopMods)
+                    {
+                        DoColorLoop();
+                    }
+                }
+                else if (commandVO.sub)
+                {
+                    if (Properties.Settings.Default.colorloopSubs)
+                    {
+                        DoColorLoop();
+                    }
+                }
+
             }
         }
 
@@ -336,8 +394,6 @@ namespace lightbot_net_app
 
             if (doColorLoop) DoColorLoop();
             if (doBlink) DoBlink();
-
-
             return doChangeColors;
 
 
