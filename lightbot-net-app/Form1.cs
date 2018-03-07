@@ -52,6 +52,8 @@ namespace lightbot_net_app
             checkBox4.Checked = Properties.Settings.Default.subs;
             checkBox5.Checked = Properties.Settings.Default.setlightsMods;
             checkBox6.Checked = Properties.Settings.Default.setlightsSubs;
+            checkBox7.Checked = Properties.Settings.Default.colorloopMods;
+            checkBox8.Checked = Properties.Settings.Default.colorloopSubs;
 
             /// int Textboxes
             textBox2.Text = Properties.Settings.Default.cheerFloor.ToString();
@@ -124,6 +126,8 @@ namespace lightbot_net_app
             Properties.Settings.Default.subs = checkBox4.Checked;
             Properties.Settings.Default.setlightsMods = checkBox5.Checked;
             Properties.Settings.Default.setlightsSubs = checkBox6.Checked;
+            Properties.Settings.Default.colorloopMods = checkBox7.Checked;
+            Properties.Settings.Default.colorloopSubs = checkBox8.Checked;
 
             /// int Textboxes
             Properties.Settings.Default.cheerFloor = Int32.Parse(textBox2.Text);

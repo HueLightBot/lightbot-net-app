@@ -217,13 +217,37 @@ namespace lightbot_net_app.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
         public bool setlightsMods {
             get {
                 return ((bool)(this["setlightsMods"]));
             }
             set {
                 this["setlightsMods"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool colorloopSubs {
+            get {
+                return ((bool)(this["colorloopSubs"]));
+            }
+            set {
+                this["colorloopSubs"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool colorloopMods {
+            get {
+                return ((bool)(this["colorloopMods"]));
+            }
+            set {
+                this["colorloopMods"] = value;
             }
         }
     }
