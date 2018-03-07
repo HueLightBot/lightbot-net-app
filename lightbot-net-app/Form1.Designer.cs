@@ -77,6 +77,10 @@
             this.textBox6 = new System.Windows.Forms.TextBox();
             this.label12 = new System.Windows.Forms.Label();
             this.eventLog1 = new System.Diagnostics.EventLog();
+            this.label13 = new System.Windows.Forms.Label();
+            this.label14 = new System.Windows.Forms.Label();
+            this.checkBox5 = new System.Windows.Forms.CheckBox();
+            this.checkBox6 = new System.Windows.Forms.CheckBox();
             this.panel1.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -233,6 +237,10 @@
             // panel2
             // 
             this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel2.Controls.Add(this.checkBox6);
+            this.panel2.Controls.Add(this.checkBox5);
+            this.panel2.Controls.Add(this.label14);
+            this.panel2.Controls.Add(this.label13);
             this.panel2.Controls.Add(this.comboBox5);
             this.panel2.Controls.Add(this.comboBox4);
             this.panel2.Controls.Add(this.comboBox3);
@@ -539,6 +547,44 @@
             this.eventLog1.SynchronizingObject = this;
             this.eventLog1.EntryWritten += new System.Diagnostics.EntryWrittenEventHandler(this.eventLog1_EntryWritten);
             // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(4, 323);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(115, 13);
+            this.label13.TabIndex = 23;
+            this.label13.Text = "Command Permissions:";
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(26, 346);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(48, 13);
+            this.label14.TabIndex = 24;
+            this.label14.Text = "!setlights";
+            // 
+            // checkBox5
+            // 
+            this.checkBox5.AutoSize = true;
+            this.checkBox5.Location = new System.Drawing.Point(80, 345);
+            this.checkBox5.Name = "checkBox5";
+            this.checkBox5.Size = new System.Drawing.Size(52, 17);
+            this.checkBox5.TabIndex = 25;
+            this.checkBox5.Text = "Mods";
+            this.checkBox5.UseVisualStyleBackColor = true;
+            // 
+            // checkBox6
+            // 
+            this.checkBox6.AutoSize = true;
+            this.checkBox6.Location = new System.Drawing.Point(132, 345);
+            this.checkBox6.Name = "checkBox6";
+            this.checkBox6.Size = new System.Drawing.Size(50, 17);
+            this.checkBox6.TabIndex = 26;
+            this.checkBox6.Text = "Subs";
+            this.checkBox6.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -621,6 +667,10 @@
         private System.Windows.Forms.TextBox textBox6;
         private System.Windows.Forms.Label label12;
         private System.Diagnostics.EventLog eventLog1;
+        private System.Windows.Forms.CheckBox checkBox6;
+        private System.Windows.Forms.CheckBox checkBox5;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.Label label13;
     }
 }
 

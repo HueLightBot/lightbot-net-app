@@ -202,5 +202,29 @@ namespace lightbot_net_app.Properties {
                 this["Tier3SubAction"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool setlightsSubs {
+            get {
+                return ((bool)(this["setlightsSubs"]));
+            }
+            set {
+                this["setlightsSubs"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool setlightsMods {
+            get {
+                return ((bool)(this["setlightsMods"]));
+            }
+            set {
+                this["setlightsMods"] = value;
+            }
+        }
     }
 }

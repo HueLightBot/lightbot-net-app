@@ -6,10 +6,8 @@ using System.Windows.Forms;
 using Q42.HueApi;
 using Q42.HueApi.Interfaces;
 using System.Threading;
-using Q42.HueApi.Converters;
 using Q42.HueApi.ColorConverters;
 using Q42.HueApi.ColorConverters.Original;
-using PubSub;
 using ServiceStack.Redis;
 using Newtonsoft.Json;
 using System.Text.RegularExpressions;
@@ -22,7 +20,7 @@ namespace lightbot_net_app
         public IBridgeLocator locator = new HttpBridgeLocator();
         public ILocalHueClient client;
         public IReadOnlyCollection<Q42.HueApi.Models.Groups.Group> groups;
-        public System.Threading.Thread pubsubThread;
+        public Thread pubsubThread;
 
         private IRedisPubSubServer redisPubSub;
 
@@ -52,6 +50,8 @@ namespace lightbot_net_app
             checkBox2.Checked = Properties.Settings.Default.largeCheer;
             checkBox3.Checked = Properties.Settings.Default.onOff;
             checkBox4.Checked = Properties.Settings.Default.subs;
+            checkBox5.Checked = Properties.Settings.Default.setlightsMods;
+            checkBox6.Checked = Properties.Settings.Default.setlightsSubs;
 
             /// int Textboxes
             textBox2.Text = Properties.Settings.Default.cheerFloor.ToString();
@@ -86,7 +86,7 @@ namespace lightbot_net_app
         {
             bridgeIPs = await locator.LocateBridgesAsync(TimeSpan.FromSeconds(10));
             client = new LocalHueClient(bridgeIPs.First().IpAddress);
-            if (Properties.Settings.Default.appkey != "")
+            if (!string.IsNullOrEmpty(Properties.Settings.Default.appkey))
             {
                 client.Initialize(Properties.Settings.Default.appkey);
                 logEvent("Connected with previous Hue Auth");
@@ -122,6 +122,8 @@ namespace lightbot_net_app
             Properties.Settings.Default.largeCheer = checkBox2.Checked;
             Properties.Settings.Default.onOff = checkBox3.Checked;
             Properties.Settings.Default.subs = checkBox4.Checked;
+            Properties.Settings.Default.setlightsMods = checkBox5.Checked;
+            Properties.Settings.Default.setlightsSubs = checkBox6.Checked;
 
             /// int Textboxes
             Properties.Settings.Default.cheerFloor = Int32.Parse(textBox2.Text);
@@ -177,7 +179,7 @@ namespace lightbot_net_app
         {
             Console.WriteLine("Started pubsub");
 
-            var clientsManager = new PooledRedisClientManager("3rogK4bOMIAFDSJ8P0FqjNYxwDIk6UatbbMlUVV7uySHnPhxhrh0IFIwnf3ZEjo@pubsub.huelightbot.com");
+            var clientsManager = new PooledRedisClientManager("client:3rogK4bOMIAFDSJ8P0FqjNYxwDIk6UatbbMlUVV7uySHnPhxhrh0IFIwnf3ZEjo@pubsub.huelightbot.com");
             
             redisPubSub = new RedisPubSubServer(clientsManager, textBox1.Text)
             {
@@ -190,14 +192,14 @@ namespace lightbot_net_app
 
         private void HandleOnError(Exception ex)
         {
-            logEvent(String.Format("Received '{0}' error from pubsub", ex.Message));
+            logEvent(string.Format("Received '{0}' error from pubsub", ex.Message));
             
         }
 
 
         private void HandleOnMessage(string channel, string msg)
         {
-            logEvent(String.Format("Received '{0}' from pubsub", msg, channel));
+            logEvent(string.Format("Received '{0}' from pubsub", msg, channel));
 
             if (msg.Contains("cheer"))
             {
@@ -208,7 +210,7 @@ namespace lightbot_net_app
 
                     foreach (Match match in Regex.Matches(cheer.message, @"#([0-9a-fA-F]{6})"))
                     {
-                        if (!String.IsNullOrEmpty(match.Value))
+                        if (!string.IsNullOrEmpty(match.Value))
                             SetHexColor(match.Value);
                     }
 
@@ -235,32 +237,49 @@ namespace lightbot_net_app
                 }
 
             }
+            else if (msg.Contains("sub"))
+            {
+                // sub logic
+            }
+            else if (msg.Contains("command"))
+            {
+                // command logic
+            }
+            else
+            {
+                // wtf
+            }
         }
 
         private void DoColorLoop()
         {
             var command = new LightCommand();
             command.Effect = Effect.ColorLoop;
+            Q42.HueApi.Models.Groups.Group selectedGroup = getSelectedGroup();
 
-            client.SendCommandAsync(command);
+
+            client.SendCommandAsync(command, selectedGroup.Lights);
             logEvent("Doing a Color Loop");
         }
 
         private void DoBlink()
         {
             var command = new LightCommand();
-            //command.Alert = Alerts.Once;
+            command.Alert = Alert.Multiple;
+            Q42.HueApi.Models.Groups.Group selectedGroup = getSelectedGroup();
 
-            client.SendCommandAsync(command);
-            logEvent("Doing a Color Loop");
+
+            client.SendCommandAsync(command, selectedGroup.Lights);
+            logEvent("Doing a Blink");
         }
 
         private void SetHexColor(string hex)
         {
             var command = new LightCommand();
             command.SetColor(new RGBColor(hex));
+            Q42.HueApi.Models.Groups.Group selectedGroup = getSelectedGroup();
 
-            client.SendCommandAsync(command);
+            client.SendCommandAsync(command, selectedGroup.Lights);
             logEvent("Setting Lights to " + hex);
         }
 
@@ -268,16 +287,20 @@ namespace lightbot_net_app
         {
             var command = new LightCommand();
             command.TurnOff();
+            Q42.HueApi.Models.Groups.Group selectedGroup = getSelectedGroup();
 
-            client.SendCommandAsync(command);
+
+            client.SendCommandAsync(command, selectedGroup.Lights);
         }
 
         private void SetLightsOn()
         {
             var command = new LightCommand();
             command.TurnOn();
+            Q42.HueApi.Models.Groups.Group selectedGroup = getSelectedGroup();
 
-            client.SendCommandAsync(command);
+
+            client.SendCommandAsync(command, selectedGroup.Lights);
         }
        private void contextMenuStrip1_Opening(object sender, CancelEventArgs e)
         {
@@ -289,7 +312,8 @@ namespace lightbot_net_app
             Q42.HueApi.Models.Groups.Group selectedGroup = null;
             foreach (Q42.HueApi.Models.Groups.Group group in groups)
             {
-                string g = comboBox6.SelectedItem.ToString();
+                string g = "";
+                Invoke(new Action(() => { g = comboBox6.SelectedItem.ToString(); }));
                 Console.WriteLine(g);
                 if (group.Name.Equals(g, StringComparison.Ordinal))
                 {
@@ -312,7 +336,7 @@ namespace lightbot_net_app
                 Q42.HueApi.Models.Groups.Group selectedGroup = getSelectedGroup();
 
                 await client.SendCommandAsync(commandLoopOn, selectedGroup.Lights);
-                System.Threading.Thread.Sleep(20000);
+                Thread.Sleep(20000);
                 await client.SendCommandAsync(commandLoopOff, selectedGroup.Lights);
                 logEvent("Looped Lights via UI");
             }
@@ -340,7 +364,7 @@ namespace lightbot_net_app
                 if (await client.CheckConnection() == true)
                 {
                     var command = new LightCommand();
-                    Q42.HueApi.ColorConverters.RGBColor color = new Q42.HueApi.ColorConverters.RGBColor();
+                    RGBColor color = new RGBColor();
                     color.R = colorDialog1.Color.R;
                     color.G = colorDialog1.Color.G;
                     color.B = colorDialog1.Color.B;
@@ -420,6 +444,15 @@ namespace lightbot_net_app
     {
         public string type { get; set; }
         public string nick { get; set; }
+        public string message { get; set; }
+    }
+
+    public class CommandVO
+    {
+        public string type { get; set; }
+        public string nick { get; set; }
+        public bool mod { get; set; }
+        public bool sub { get; set; }
         public string message { get; set; }
     }
 }
