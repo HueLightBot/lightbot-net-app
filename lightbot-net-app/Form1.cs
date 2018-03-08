@@ -170,8 +170,6 @@ namespace lightbot_net_app
             {
                 pubsubThread = (new Thread(() => pubsubRunner(client)));
                 pubsubThread.Start();
-
-                //HandleOnMessage("geoff", "{\"type\": \"cheer\", \"nick\": \"aetaric\", \"amount\": 200, \"message\": \"cheer200 this is a test #ff0000\"}");
             }
         }
 
@@ -309,11 +307,11 @@ namespace lightbot_net_app
             }
             else if (cheer.amount >= Properties.Settings.Default.largeCheerFloor && Properties.Settings.Default.largeCheer)
             {
-                if (Properties.Settings.Default.largeCheerAction == "Blink")
+                if (Properties.Settings.Default.largeCheerAction.ToLower() == "blink")
                 {
                     DoBlink();
                 }
-                else
+                else if (Properties.Settings.Default.largeCheerAction.ToLower() == "loop")
                 {
                     DoColorLoop();
                 }
@@ -418,7 +416,7 @@ namespace lightbot_net_app
             if (await client.CheckConnection() == true)
             {
                 var command = new LightCommand();
-                //command.Alert = Alerts.Once;
+                command.Alert = Alert.Multiple;
                 Q42.HueApi.Models.Groups.Group selectedGroup = getSelectedGroup();
 
                 await client.SendCommandAsync(command, selectedGroup.Lights);
