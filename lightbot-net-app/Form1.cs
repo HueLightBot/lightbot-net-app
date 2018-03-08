@@ -30,11 +30,6 @@ namespace lightbot_net_app
             InitializeComponent();
         }
 
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void notifyIcon1_MouseDoubleClick(object sender, MouseEventArgs e)
         {
             if (this.Visible == false)
@@ -600,10 +595,6 @@ namespace lightbot_net_app
             textBox6.Invoke(new Action(() => { textBox6.AppendText(eventText + Environment.NewLine); }));
         }
 
-        private void textBox6_TextChanged(object sender, EventArgs e)
-        {
-            
-        }
     }
 
 
