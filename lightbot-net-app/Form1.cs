@@ -222,12 +222,12 @@ namespace lightbot_net_app
                 HandleAction(cheer);
 
             }
-            else if (msg.Contains("sub"))
+            else if (msg.Contains("command"))
             {
                SubVO subVO = JsonConvert.DeserializeObject<SubVO>(msg);
                 HandleAction(subVO);
             }
-            else if (msg.Contains("command"))
+            else if (msg.Contains("sub"))
             {
                 CommandVO commandVO = JsonConvert.DeserializeObject<CommandVO>(msg);
                 HandleAction(commandVO);
