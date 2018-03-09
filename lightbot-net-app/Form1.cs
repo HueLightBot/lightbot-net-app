@@ -30,11 +30,6 @@ namespace lightbot_net_app
             InitializeComponent();
         }
 
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void notifyIcon1_MouseDoubleClick(object sender, MouseEventArgs e)
         {
             if (this.Visible == false)
@@ -92,34 +87,55 @@ namespace lightbot_net_app
         private async void button4_Click(object sender, EventArgs e)
         {
             bridgeIPs = await locator.LocateBridgesAsync(TimeSpan.FromSeconds(10));
-            client = new LocalHueClient(bridgeIPs.First().IpAddress);
-            if (!string.IsNullOrEmpty(Properties.Settings.Default.appkey))
+            try
             {
-                client.Initialize(Properties.Settings.Default.appkey);
-                logEvent("Connected with previous Hue Auth");
+                client = new LocalHueClient(bridgeIPs.First().IpAddress);
+                if (!string.IsNullOrEmpty(Properties.Settings.Default.appkey))
+                {
+                    client.Initialize(Properties.Settings.Default.appkey);
+                    logEvent("Connected with previous Hue Auth");
+                }
+                else
+                {
+                    string messageBoxText = "Press the button on your Hue bridge and then click Ok.";
+                    string caption = "Action Required";
+                    MessageBoxButtons button = MessageBoxButtons.OK;
+                    DialogResult result = MessageBox.Show(messageBoxText, caption, button);
+
+                    switch (result)
+                    {
+                        case DialogResult.OK:
+                            var appKey = await client.RegisterAsync("HueLightBot", Environment.MachineName);
+                            Properties.Settings.Default.appkey = appKey;
+                            Properties.Settings.Default.Save();
+                            logEvent("Connected with new Hue Auth");
+                            break;
+                    }
+                }
+
+                groups = await client.GetGroupsAsync();
+                List<string> groupNames = groups.Select(x => x.Name).ToList();
+
+                comboBox6.DataSource = groupNames;
             }
-            else
+            catch (Exception exception)
             {
-                string messageBoxText = "Press the button on your Hue bridge and then click Ok.";
-                string caption = "Action Required";
+                string messageBoxText;
+                string caption;
+                if (exception.Message == "Link button not pressed")
+                {
+                    messageBoxText = "Link Button not pressed or pairing didn't occur in time. Please try again.";
+                    caption = "Error";
+                }
+                else
+                {
+                    messageBoxText = string.Format("An uncaught exception occured. Please let the devs know the following: {0}", Environment.NewLine + exception.Message);
+                    caption = "Error";
+                }
+
                 MessageBoxButtons button = MessageBoxButtons.OK;
                 DialogResult result = MessageBox.Show(messageBoxText, caption, button);
-
-                switch (result)
-                {
-                    case DialogResult.OK:
-                        var appKey = await client.RegisterAsync("HueLightBot", Environment.MachineName);
-                        Properties.Settings.Default.appkey = appKey;
-                        Properties.Settings.Default.Save();
-                        logEvent("Connected with new Hue Auth");
-                        break;
-                }
             }
-            
-            groups = await client.GetGroupsAsync();
-            List<string> groupNames =  groups.Select(x => x.Name).ToList();
-
-            comboBox6.DataSource = groupNames;
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -170,8 +186,6 @@ namespace lightbot_net_app
             {
                 pubsubThread = (new Thread(() => pubsubRunner(client)));
                 pubsubThread.Start();
-
-                //HandleOnMessage("geoff", "{\"type\": \"cheer\", \"nick\": \"aetaric\", \"amount\": 200, \"message\": \"cheer200 this is a test #ff0000\"}");
             }
         }
 
@@ -309,11 +323,11 @@ namespace lightbot_net_app
             }
             else if (cheer.amount >= Properties.Settings.Default.largeCheerFloor && Properties.Settings.Default.largeCheer)
             {
-                if (Properties.Settings.Default.largeCheerAction == "Blink")
+                if (Properties.Settings.Default.largeCheerAction.ToLower() == "blink")
                 {
                     DoBlink();
                 }
-                else
+                else if (Properties.Settings.Default.largeCheerAction.ToLower() == "loop")
                 {
                     DoColorLoop();
                 }
@@ -418,7 +432,7 @@ namespace lightbot_net_app
             if (await client.CheckConnection() == true)
             {
                 var command = new LightCommand();
-                //command.Alert = Alerts.Once;
+                command.Alert = Alert.Multiple;
                 Q42.HueApi.Models.Groups.Group selectedGroup = getSelectedGroup();
 
                 await client.SendCommandAsync(command, selectedGroup.Lights);
@@ -581,10 +595,6 @@ namespace lightbot_net_app
             textBox6.Invoke(new Action(() => { textBox6.AppendText(eventText + Environment.NewLine); }));
         }
 
-        private void textBox6_TextChanged(object sender, EventArgs e)
-        {
-            
-        }
     }
 
 
