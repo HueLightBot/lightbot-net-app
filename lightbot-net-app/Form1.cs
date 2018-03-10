@@ -238,13 +238,14 @@ namespace lightbot_net_app
             }
             else if (msg.Contains("command"))
             {
-               SubVO subVO = JsonConvert.DeserializeObject<SubVO>(msg);
-                HandleAction(subVO);
+                CommandVO commandVO = JsonConvert.DeserializeObject<CommandVO>(msg);
+                HandleAction(commandVO);
+
             }
             else if (msg.Contains("sub"))
             {
-                CommandVO commandVO = JsonConvert.DeserializeObject<CommandVO>(msg);
-                HandleAction(commandVO);
+                SubVO subVO = JsonConvert.DeserializeObject<SubVO>(msg);
+                HandleAction(subVO);
             }
             else
             {
