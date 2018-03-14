@@ -418,13 +418,17 @@ namespace lightbot_net_app
         {
             if (await client.CheckConnection() == true)
             {
-                var command = new LightCommand();
-            command.Effect = Effect.ColorLoop;
-            Q42.HueApi.Models.Groups.Group selectedGroup = getSelectedGroup();
+                var commandLoopOn = new LightCommand();
+                commandLoopOn.Effect = Effect.ColorLoop;
+                var commandLoopOff = new LightCommand();
+                commandLoopOff.Effect = Effect.None;
+                Q42.HueApi.Models.Groups.Group selectedGroup = getSelectedGroup();
 
-            await client.SendCommandAsync(command, selectedGroup.Lights);
+                await client.SendCommandAsync(commandLoopOn, selectedGroup.Lights);
+                Thread.Sleep(20000);
+                await client.SendCommandAsync(commandLoopOff, selectedGroup.Lights);
 
-            logEvent("Doing a Color Loop");
+                logEvent("Doing a Color Loop");
             }
         }
 
@@ -437,7 +441,7 @@ namespace lightbot_net_app
                 Q42.HueApi.Models.Groups.Group selectedGroup = getSelectedGroup();
 
                 await client.SendCommandAsync(command, selectedGroup.Lights);
-                logEvent("Doing a Color Loop");
+                logEvent("Doing a Blink");
             }
         }
 
