@@ -319,6 +319,7 @@ namespace lightbot_net_app
                 {
                     if (!string.IsNullOrEmpty(match.Value))
                         SetHexColor(match.Value);
+                        Thread.Sleep(3000);
                 }
 
             }
