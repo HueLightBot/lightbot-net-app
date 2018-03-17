@@ -312,18 +312,8 @@ namespace lightbot_net_app
 
         private void HandleAction(CheerVO cheer)
         {
-            if (cheer.amount >= Properties.Settings.Default.cheerFloor)
-            {
 
-                foreach (Match match in Regex.Matches(cheer.message, @"#([0-9a-fA-F]{6})"))
-                {
-                    if (!string.IsNullOrEmpty(match.Value))
-                        SetHexColor(match.Value);
-                        Thread.Sleep(3000);
-                }
-
-            }
-            else if (cheer.amount >= Properties.Settings.Default.largeCheerFloor && Properties.Settings.Default.largeCheer)
+            if (cheer.amount >= Properties.Settings.Default.largeCheerFloor && Properties.Settings.Default.largeCheer)
             {
                 if (Properties.Settings.Default.largeCheerAction.ToLower() == "blink")
                 {
@@ -335,7 +325,24 @@ namespace lightbot_net_app
                 }
 
             }
-            else if (cheer.amount >= Properties.Settings.Default.offFloor && cheer.message.Contains("!off") && Properties.Settings.Default.onOff)
+            if (cheer.amount >= Properties.Settings.Default.cheerFloor)
+            {
+                int count = 1;
+                foreach (Match match in Regex.Matches(cheer.message, @"#([0-9a-fA-F]{6})"))
+                {
+
+                    if(count* Properties.Settings.Default.cheerFloor <= cheer.amount)
+                        if (!string.IsNullOrEmpty(match.Value))
+                            SetHexColor(match.Value);
+                            Thread.Sleep(3000);
+                    count++;
+                }
+
+            }
+
+
+
+            if (cheer.amount >= Properties.Settings.Default.offFloor && cheer.message.Contains("!off") && Properties.Settings.Default.onOff)
             {
                 SetLightsOff();
             }
