@@ -519,8 +519,13 @@ namespace lightbot_net_app
                 Q42.HueApi.Models.Groups.Group selectedGroup = getSelectedGroup();
 
                 await client.SendCommandAsync(commandLoopOn, selectedGroup.Lights);
-                Thread.Sleep(20000);
-                await client.SendCommandAsync(commandLoopOff, selectedGroup.Lights);
+
+
+                new Thread(() =>
+                {
+                    Thread.Sleep(20000);
+                    client.SendCommandAsync(commandLoopOff, selectedGroup.Lights);
+                }).Start();
                 logEvent("Looped Lights via UI");
             }
         }
