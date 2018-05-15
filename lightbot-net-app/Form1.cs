@@ -219,30 +219,29 @@ namespace lightbot_net_app
 
         private void HandleOnError(Exception ex)
         {
-#if DEBUG
             logEvent(string.Format("Received '{0}' error from pubsub", ex.Message));
-#endif   
+
         }
 
 
         private void HandleOnMessage(string channel, string msg)
         {
-#if DEBUG
+
             logEvent(string.Format("Received '{0}' from pubsub", msg, channel));
-#endif
-            if (msg.Contains("cheer"))
+
+            if (msg.Contains("{\"type\": \"cheer\""))
             {
                 CheerVO cheer = JsonConvert.DeserializeObject<CheerVO>(msg);
                 HandleAction(cheer);
 
             }
-            else if (msg.Contains("command"))
+            else if (msg.Contains("{\"type\": \"command\""))
             {
                 CommandVO commandVO = JsonConvert.DeserializeObject<CommandVO>(msg);
                 HandleAction(commandVO);
 
             }
-            else if (msg.Contains("sub"))
+            else if (msg.Contains("{\"type\": \"sub\""))
             {
                 SubVO subVO = JsonConvert.DeserializeObject<SubVO>(msg);
                 HandleAction(subVO);
@@ -355,7 +354,7 @@ namespace lightbot_net_app
         private void HandleAction(SubVO subVO)
         {
             SubTiers subTier = SubTiers.Unassigned;
-            switch (subVO.type.ToLower())
+            switch (subVO.tier.ToLower())
             {
                 case "prime":
                     subTier = SubTiers.Prime;
@@ -610,7 +609,10 @@ namespace lightbot_net_app
         private void logEvent(string eventText)
         {
             eventLog1.WriteEntry(eventText);
+
+#if DEBUG
             textBox6.Invoke(new Action(() => { textBox6.AppendText(eventText + Environment.NewLine); }));
+#endif
         }
 
     }
@@ -626,9 +628,10 @@ namespace lightbot_net_app
 
     public class SubVO
     {
-        public string type { get; set; }
+        public string tier { get; set; }
         public string nick { get; set; }
         public string message { get; set; }
+        public string type { get; set; }
     }
 
     public class CommandVO
