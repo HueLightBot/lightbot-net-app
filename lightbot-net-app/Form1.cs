@@ -615,6 +615,22 @@ namespace lightbot_net_app
 #endif
         }
 
+        private void exitToolStripMenuItem_Click_1(object sender, EventArgs e)
+        {
+            if (pubsubThread != null)
+            {
+                redisPubSub.Stop();
+            }
+            Application.Exit();
+        }
+
+        private void showHueLightBotToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (this.Visible == false)
+            {
+                this.ShowDialog();
+            }
+        }
     }
 
 

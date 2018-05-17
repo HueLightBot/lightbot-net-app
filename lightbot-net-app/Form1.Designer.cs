@@ -47,6 +47,10 @@
             this.label1 = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.tier3ColorBox = new System.Windows.Forms.CheckBox();
+            this.tier2SubComboBox = new System.Windows.Forms.CheckBox();
+            this.tier1subColorCheckBox = new System.Windows.Forms.CheckBox();
+            this.primeSubColorBox = new System.Windows.Forms.CheckBox();
             this.checkBox8 = new System.Windows.Forms.CheckBox();
             this.checkBox7 = new System.Windows.Forms.CheckBox();
             this.label15 = new System.Windows.Forms.Label();
@@ -84,10 +88,6 @@
             this.textBox6 = new System.Windows.Forms.TextBox();
             this.label12 = new System.Windows.Forms.Label();
             this.eventLog1 = new System.Diagnostics.EventLog();
-            this.primeSubColorBox = new System.Windows.Forms.CheckBox();
-            this.tier1subColorCheckBox = new System.Windows.Forms.CheckBox();
-            this.tier2SubComboBox = new System.Windows.Forms.CheckBox();
-            this.tier3ColorBox = new System.Windows.Forms.CheckBox();
             this.panel1.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -212,6 +212,7 @@
             this.showHueLightBotToolStripMenuItem.Name = "showHueLightBotToolStripMenuItem";
             this.showHueLightBotToolStripMenuItem.Size = new System.Drawing.Size(173, 22);
             this.showHueLightBotToolStripMenuItem.Text = "Show HueLightBot";
+            this.showHueLightBotToolStripMenuItem.Click += new System.EventHandler(this.showHueLightBotToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
             // 
@@ -223,6 +224,7 @@
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
             this.exitToolStripMenuItem.Size = new System.Drawing.Size(173, 22);
             this.exitToolStripMenuItem.Text = "Exit";
+            this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click_1);
             // 
             // label1
             // 
@@ -280,6 +282,46 @@
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(347, 396);
             this.panel2.TabIndex = 6;
+            // 
+            // tier3ColorBox
+            // 
+            this.tier3ColorBox.AutoSize = true;
+            this.tier3ColorBox.Location = new System.Drawing.Point(188, 302);
+            this.tier3ColorBox.Name = "tier3ColorBox";
+            this.tier3ColorBox.Size = new System.Drawing.Size(116, 17);
+            this.tier3ColorBox.TabIndex = 32;
+            this.tier3ColorBox.Text = "Can Change Lights";
+            this.tier3ColorBox.UseVisualStyleBackColor = true;
+            // 
+            // tier2SubComboBox
+            // 
+            this.tier2SubComboBox.AutoSize = true;
+            this.tier2SubComboBox.Location = new System.Drawing.Point(188, 276);
+            this.tier2SubComboBox.Name = "tier2SubComboBox";
+            this.tier2SubComboBox.Size = new System.Drawing.Size(116, 17);
+            this.tier2SubComboBox.TabIndex = 31;
+            this.tier2SubComboBox.Text = "Can Change Lights";
+            this.tier2SubComboBox.UseVisualStyleBackColor = true;
+            // 
+            // tier1subColorCheckBox
+            // 
+            this.tier1subColorCheckBox.AutoSize = true;
+            this.tier1subColorCheckBox.Location = new System.Drawing.Point(188, 250);
+            this.tier1subColorCheckBox.Name = "tier1subColorCheckBox";
+            this.tier1subColorCheckBox.Size = new System.Drawing.Size(116, 17);
+            this.tier1subColorCheckBox.TabIndex = 31;
+            this.tier1subColorCheckBox.Text = "Can Change Lights";
+            this.tier1subColorCheckBox.UseVisualStyleBackColor = true;
+            // 
+            // primeSubColorBox
+            // 
+            this.primeSubColorBox.AutoSize = true;
+            this.primeSubColorBox.Location = new System.Drawing.Point(189, 222);
+            this.primeSubColorBox.Name = "primeSubColorBox";
+            this.primeSubColorBox.Size = new System.Drawing.Size(116, 17);
+            this.primeSubColorBox.TabIndex = 30;
+            this.primeSubColorBox.Text = "Can Change Lights";
+            this.primeSubColorBox.UseVisualStyleBackColor = true;
             // 
             // checkBox8
             // 
@@ -625,46 +667,6 @@
             this.eventLog1.Source = "HueLightBot";
             this.eventLog1.SynchronizingObject = this;
             this.eventLog1.EntryWritten += new System.Diagnostics.EntryWrittenEventHandler(this.eventLog1_EntryWritten);
-            // 
-            // primeSubColorBox
-            // 
-            this.primeSubColorBox.AutoSize = true;
-            this.primeSubColorBox.Location = new System.Drawing.Point(189, 222);
-            this.primeSubColorBox.Name = "primeSubColorBox";
-            this.primeSubColorBox.Size = new System.Drawing.Size(116, 17);
-            this.primeSubColorBox.TabIndex = 30;
-            this.primeSubColorBox.Text = "Can Change Lights";
-            this.primeSubColorBox.UseVisualStyleBackColor = true;
-            // 
-            // tier1subColorCheckBox
-            // 
-            this.tier1subColorCheckBox.AutoSize = true;
-            this.tier1subColorCheckBox.Location = new System.Drawing.Point(188, 250);
-            this.tier1subColorCheckBox.Name = "tier1subColorCheckBox";
-            this.tier1subColorCheckBox.Size = new System.Drawing.Size(116, 17);
-            this.tier1subColorCheckBox.TabIndex = 31;
-            this.tier1subColorCheckBox.Text = "Can Change Lights";
-            this.tier1subColorCheckBox.UseVisualStyleBackColor = true;
-            // 
-            // tier2SubComboBox
-            // 
-            this.tier2SubComboBox.AutoSize = true;
-            this.tier2SubComboBox.Location = new System.Drawing.Point(188, 276);
-            this.tier2SubComboBox.Name = "tier2SubComboBox";
-            this.tier2SubComboBox.Size = new System.Drawing.Size(116, 17);
-            this.tier2SubComboBox.TabIndex = 31;
-            this.tier2SubComboBox.Text = "Can Change Lights";
-            this.tier2SubComboBox.UseVisualStyleBackColor = true;
-            // 
-            // tier3ColorBox
-            // 
-            this.tier3ColorBox.AutoSize = true;
-            this.tier3ColorBox.Location = new System.Drawing.Point(188, 302);
-            this.tier3ColorBox.Name = "tier3ColorBox";
-            this.tier3ColorBox.Size = new System.Drawing.Size(116, 17);
-            this.tier3ColorBox.TabIndex = 32;
-            this.tier3ColorBox.Text = "Can Change Lights";
-            this.tier3ColorBox.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
