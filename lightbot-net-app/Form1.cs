@@ -173,7 +173,7 @@ namespace lightbot_net_app
         private void button1_Click(object sender, EventArgs e)
         {
             /// stop
-            if (pubsubThread.IsAlive)
+            if (pubsubThread != null && pubsubThread.IsAlive)
             {
                 pubsubThread.Interrupt();
             }
@@ -624,7 +624,7 @@ namespace lightbot_net_app
             {
                 redisPubSub.Stop();
             }
-            Application.Exit();
+            Environment.Exit(0);
         }
 
         private void showHueLightBotToolStripMenuItem_Click(object sender, EventArgs e)
