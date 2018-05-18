@@ -175,6 +175,7 @@ namespace lightbot_net_app
             /// stop
             if (pubsubThread != null && pubsubThread.IsAlive)
             {
+                logEvent("Stopping LightBot!",true);
                 pubsubThread.Interrupt();
             }
         }
@@ -184,6 +185,7 @@ namespace lightbot_net_app
             /// start
             if (pubsubThread == null)
             {
+                logEvent("Starting LightBot!",true);
                 pubsubThread = (new Thread(() => pubsubRunner(client)));
                 pubsubThread.Start();
             }
@@ -311,7 +313,7 @@ namespace lightbot_net_app
 
         private void HandleAction(CheerVO cheer)
         {
-
+            logEvent(String.Format("{0} cheered {1} bits!", cheer.nick, cheer.amount));
             if (cheer.amount >= Properties.Settings.Default.largeCheerFloor && Properties.Settings.Default.largeCheer)
             {
                 if (Properties.Settings.Default.largeCheerAction.ToLower() == "blink")
@@ -353,6 +355,9 @@ namespace lightbot_net_app
 
         private void HandleAction(SubVO subVO)
         {
+
+            logEvent(String.Format("{0} just subscribed at tier {1}",subVO.nick,subVO.tier));
+
             SubTiers subTier = SubTiers.Unassigned;
             switch (subVO.tier.ToLower())
             {
@@ -438,7 +443,7 @@ namespace lightbot_net_app
                 Thread.Sleep(loopDuration);
                 await client.SendCommandAsync(commandLoopOff, selectedGroup.Lights);
 
-                logEvent("Doing a Color Loop");
+                logEvent("Doing a Color Loop",true);
             }
         }
 
@@ -451,7 +456,7 @@ namespace lightbot_net_app
                 Q42.HueApi.Models.Groups.Group selectedGroup = getSelectedGroup();
 
                 await client.SendCommandAsync(command, selectedGroup.Lights);
-                logEvent("Doing a Blink");
+                logEvent("Doing a Blink",true);
             }
         }
 
@@ -464,7 +469,7 @@ namespace lightbot_net_app
                 Q42.HueApi.Models.Groups.Group selectedGroup = getSelectedGroup();
 
                 await client.SendCommandAsync(command, selectedGroup.Lights);
-                logEvent("Setting Lights to " + hex);
+                logEvent("Setting Lights to " + hex,true);
             }
         }
 
@@ -528,7 +533,7 @@ namespace lightbot_net_app
                     Thread.Sleep(20000);
                     client.SendCommandAsync(commandLoopOff, selectedGroup.Lights);
                 }).Start();
-                logEvent("Looped Lights via UI");
+                logEvent("Looped Lights via UI",true);
             }
         }
 
@@ -542,7 +547,7 @@ namespace lightbot_net_app
                 Q42.HueApi.Models.Groups.Group selectedGroup = getSelectedGroup();
 
                 await client.SendCommandAsync(command, selectedGroup.Lights);
-                logEvent("Blinked Lights via UI");
+                logEvent("Blinked Lights via UI",true);
             }
         }
 
@@ -562,7 +567,7 @@ namespace lightbot_net_app
                     Q42.HueApi.Models.Groups.Group selectedGroup = getSelectedGroup();
 
                     await client.SendCommandAsync(command, selectedGroup.Lights);
-                    logEvent("Changed color via UI");
+                    logEvent("Changed color via UI",true);
                 }
             }
         }
@@ -577,7 +582,7 @@ namespace lightbot_net_app
                 Q42.HueApi.Models.Groups.Group selectedGroup = getSelectedGroup();
 
                 await client.SendCommandAsync(command, selectedGroup.Lights);
-                logEvent("Turned On Lights via UI");
+                logEvent("Turned On Lights via UI",true);
             }
         }
 
@@ -591,7 +596,7 @@ namespace lightbot_net_app
                 Q42.HueApi.Models.Groups.Group selectedGroup = getSelectedGroup();
 
                 await client.SendCommandAsync(command, selectedGroup.Lights);
-                logEvent("Turned Off Lights via UI");
+                logEvent("Turned Off Lights via UI",true);
             }
         }
 
@@ -617,6 +622,19 @@ namespace lightbot_net_app
             textBox6.Invoke(new Action(() => { textBox6.AppendText(eventText + Environment.NewLine); }));
 #endif
         }
+
+        private void logEvent(string eventText, bool writeToTextbox)
+        {
+            eventLog1.WriteEntry(eventText);
+
+            if (writeToTextbox)
+            {
+                textBox6.Invoke(new Action(() => { textBox6.AppendText(eventText + Environment.NewLine); }));
+
+            }
+
+        }
+
 
         private void exitToolStripMenuItem_Click_1(object sender, EventArgs e)
         {
