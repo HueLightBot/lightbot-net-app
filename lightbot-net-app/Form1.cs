@@ -158,7 +158,7 @@ namespace lightbot_net_app
 
             /// Comboboxes
             Properties.Settings.Default.largeCheerAction = comboBox1.Text;
-            Properties.Settings.Default.primeSubAction = comboBox2.SelectedText;
+            Properties.Settings.Default.primeSubAction = comboBox2.Text;
             Properties.Settings.Default.Tier1SubAction = comboBox3.Text;
             Properties.Settings.Default.Tier2SubAction = comboBox4.Text;
             Properties.Settings.Default.Tier3SubAction = comboBox5.Text;

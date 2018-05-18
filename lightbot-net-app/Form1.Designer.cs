@@ -91,9 +91,9 @@
             this.settingsTabControl = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.label16 = new System.Windows.Forms.Label();
-            this.label17 = new System.Windows.Forms.Label();
             this.colorLoopDurationUpDown = new System.Windows.Forms.NumericUpDown();
+            this.label17 = new System.Windows.Forms.Label();
+            this.label16 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -702,7 +702,7 @@
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage1.Size = new System.Drawing.Size(351, 400);
             this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "tabPage1";
+            this.tabPage1.Text = "Twitch Settings";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
             // tabPage2
@@ -715,26 +715,8 @@
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage2.Size = new System.Drawing.Size(351, 400);
             this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "tabPage2";
+            this.tabPage2.Text = "Light Settings";
             this.tabPage2.UseVisualStyleBackColor = true;
-            // 
-            // label16
-            // 
-            this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(7, 7);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(58, 13);
-            this.label16.TabIndex = 0;
-            this.label16.Text = "Color Loop";
-            // 
-            // label17
-            // 
-            this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(43, 22);
-            this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(113, 13);
-            this.label17.TabIndex = 1;
-            this.label17.Text = "Duration (In Seconds):";
             // 
             // colorLoopDurationUpDown
             // 
@@ -757,6 +739,24 @@
             0,
             0,
             0});
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Location = new System.Drawing.Point(43, 22);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(113, 13);
+            this.label17.TabIndex = 1;
+            this.label17.Text = "Duration (In Seconds):";
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(7, 7);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(58, 13);
+            this.label16.TabIndex = 0;
+            this.label16.Text = "Color Loop";
             // 
             // Form1
             // 
