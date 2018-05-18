@@ -229,19 +229,19 @@ namespace lightbot_net_app
 
             logEvent(string.Format("Received '{0}' from pubsub", msg, channel));
 
-            if (msg.Contains("{\"type\": \"cheer\""))
+            if (msg.Contains("{\"type\":\"cheer\""))
             {
                 CheerVO cheer = JsonConvert.DeserializeObject<CheerVO>(msg);
                 HandleAction(cheer);
 
             }
-            else if (msg.Contains("{\"type\": \"command\""))
+            else if (msg.Contains("{\"type\":\"command\""))
             {
                 CommandVO commandVO = JsonConvert.DeserializeObject<CommandVO>(msg);
                 HandleAction(commandVO);
 
             }
-            else if (msg.Contains("{\"type\": \"sub\""))
+            else if (msg.Contains("{\"type\":\"sub\""))
             {
                 SubVO subVO = JsonConvert.DeserializeObject<SubVO>(msg);
                 HandleAction(subVO);
