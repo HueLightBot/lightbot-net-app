@@ -88,15 +88,26 @@
             this.textBox6 = new System.Windows.Forms.TextBox();
             this.label12 = new System.Windows.Forms.Label();
             this.eventLog1 = new System.Diagnostics.EventLog();
+            this.settingsTabControl = new System.Windows.Forms.TabControl();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.label16 = new System.Windows.Forms.Label();
+            this.label17 = new System.Windows.Forms.Label();
+            this.colorLoopDurationUpDown = new System.Windows.Forms.NumericUpDown();
             this.panel1.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.eventLog1)).BeginInit();
+            this.settingsTabControl.SuspendLayout();
+            this.tabPage1.SuspendLayout();
+            this.tabPage2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.colorLoopDurationUpDown)).BeginInit();
             this.SuspendLayout();
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(620, 453);
+            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.button1.Location = new System.Drawing.Point(620, 501);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 0;
@@ -106,7 +117,8 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(539, 453);
+            this.button2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.button2.Location = new System.Drawing.Point(539, 501);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(75, 23);
             this.button2.TabIndex = 1;
@@ -116,7 +128,8 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(458, 453);
+            this.button3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.button3.Location = new System.Drawing.Point(458, 501);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(75, 23);
             this.button3.TabIndex = 2;
@@ -278,7 +291,7 @@
             this.panel2.Controls.Add(this.label2);
             this.panel2.Controls.Add(this.textBox2);
             this.panel2.Controls.Add(this.checkBox1);
-            this.panel2.Location = new System.Drawing.Point(13, 36);
+            this.panel2.Location = new System.Drawing.Point(6, 6);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(347, 396);
             this.panel2.TabIndex = 6;
@@ -618,7 +631,8 @@
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(16, 453);
+            this.button4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.button4.Location = new System.Drawing.Point(16, 501);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(95, 23);
             this.button4.TabIndex = 7;
@@ -628,16 +642,18 @@
             // 
             // comboBox6
             // 
+            this.comboBox6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.comboBox6.FormattingEnabled = true;
-            this.comboBox6.Location = new System.Drawing.Point(275, 453);
+            this.comboBox6.Location = new System.Drawing.Point(275, 501);
             this.comboBox6.Name = "comboBox6";
             this.comboBox6.Size = new System.Drawing.Size(121, 21);
             this.comboBox6.TabIndex = 23;
             // 
             // label11
             // 
+            this.label11.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(184, 458);
+            this.label11.Location = new System.Drawing.Point(184, 506);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(85, 13);
             this.label11.TabIndex = 24;
@@ -668,17 +684,91 @@
             this.eventLog1.SynchronizingObject = this;
             this.eventLog1.EntryWritten += new System.Diagnostics.EntryWrittenEventHandler(this.eventLog1_EntryWritten);
             // 
+            // settingsTabControl
+            // 
+            this.settingsTabControl.Controls.Add(this.tabPage1);
+            this.settingsTabControl.Controls.Add(this.tabPage2);
+            this.settingsTabControl.Location = new System.Drawing.Point(16, 36);
+            this.settingsTabControl.Name = "settingsTabControl";
+            this.settingsTabControl.SelectedIndex = 0;
+            this.settingsTabControl.Size = new System.Drawing.Size(359, 426);
+            this.settingsTabControl.TabIndex = 27;
+            // 
+            // tabPage1
+            // 
+            this.tabPage1.Controls.Add(this.panel2);
+            this.tabPage1.Location = new System.Drawing.Point(4, 22);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage1.Size = new System.Drawing.Size(351, 400);
+            this.tabPage1.TabIndex = 0;
+            this.tabPage1.Text = "tabPage1";
+            this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // tabPage2
+            // 
+            this.tabPage2.Controls.Add(this.colorLoopDurationUpDown);
+            this.tabPage2.Controls.Add(this.label17);
+            this.tabPage2.Controls.Add(this.label16);
+            this.tabPage2.Location = new System.Drawing.Point(4, 22);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(351, 400);
+            this.tabPage2.TabIndex = 1;
+            this.tabPage2.Text = "tabPage2";
+            this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(7, 7);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(58, 13);
+            this.label16.TabIndex = 0;
+            this.label16.Text = "Color Loop";
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Location = new System.Drawing.Point(43, 22);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(113, 13);
+            this.label17.TabIndex = 1;
+            this.label17.Text = "Duration (In Seconds):";
+            // 
+            // colorLoopDurationUpDown
+            // 
+            this.colorLoopDurationUpDown.Location = new System.Drawing.Point(167, 20);
+            this.colorLoopDurationUpDown.Maximum = new decimal(new int[] {
+            99999,
+            0,
+            0,
+            0});
+            this.colorLoopDurationUpDown.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.colorLoopDurationUpDown.Name = "colorLoopDurationUpDown";
+            this.colorLoopDurationUpDown.Size = new System.Drawing.Size(56, 20);
+            this.colorLoopDurationUpDown.TabIndex = 2;
+            this.colorLoopDurationUpDown.Value = new decimal(new int[] {
+            20,
+            0,
+            0,
+            0});
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(707, 488);
+            this.ClientSize = new System.Drawing.Size(707, 536);
+            this.Controls.Add(this.settingsTabControl);
             this.Controls.Add(this.label12);
             this.Controls.Add(this.textBox6);
             this.Controls.Add(this.label11);
             this.Controls.Add(this.comboBox6);
             this.Controls.Add(this.button4);
-            this.Controls.Add(this.panel2);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.panel1);
@@ -696,6 +786,11 @@
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.eventLog1)).EndInit();
+            this.settingsTabControl.ResumeLayout(false);
+            this.tabPage1.ResumeLayout(false);
+            this.tabPage2.ResumeLayout(false);
+            this.tabPage2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.colorLoopDurationUpDown)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -761,6 +856,12 @@
         private System.Windows.Forms.CheckBox tier2SubComboBox;
         private System.Windows.Forms.CheckBox tier1subColorCheckBox;
         private System.Windows.Forms.CheckBox primeSubColorBox;
+        private System.Windows.Forms.TabControl settingsTabControl;
+        private System.Windows.Forms.TabPage tabPage1;
+        private System.Windows.Forms.TabPage tabPage2;
+        private System.Windows.Forms.NumericUpDown colorLoopDurationUpDown;
+        private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.Label label16;
     }
 }
 

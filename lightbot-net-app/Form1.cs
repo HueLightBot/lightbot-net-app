@@ -67,7 +67,7 @@ namespace lightbot_net_app
             tier2SubComboBox.Checked = Properties.Settings.Default.Tier2ChangeColor;
             tier3ColorBox.Checked = Properties.Settings.Default.Tier3ChangeColor;
             primeSubColorBox.Checked = Properties.Settings.Default.PrimeSubChangeColor;
-
+            colorLoopDurationUpDown.Value = Properties.Settings.Default.colorLoopDuration;
             exitToolStripMenuItem.Click += new EventHandler(exitToolStripMenuItem_Click);
 
         }
@@ -166,7 +166,7 @@ namespace lightbot_net_app
             Properties.Settings.Default.Tier2ChangeColor = tier2SubComboBox.Checked;
             Properties.Settings.Default.Tier3ChangeColor = tier3ColorBox.Checked;
             Properties.Settings.Default.PrimeSubChangeColor = primeSubColorBox.Checked;
-
+            Properties.Settings.Default.colorLoopDuration = colorLoopDurationUpDown.Value;
             Properties.Settings.Default.Save();
         }
 
@@ -432,7 +432,10 @@ namespace lightbot_net_app
                 Q42.HueApi.Models.Groups.Group selectedGroup = getSelectedGroup();
 
                 await client.SendCommandAsync(commandLoopOn, selectedGroup.Lights);
-                Thread.Sleep(20000);
+
+                int loopDuration =Convert.ToInt32(Properties.Settings.Default.colorLoopDuration) * 1000;
+
+                Thread.Sleep(loopDuration);
                 await client.SendCommandAsync(commandLoopOff, selectedGroup.Lights);
 
                 logEvent("Doing a Color Loop");
