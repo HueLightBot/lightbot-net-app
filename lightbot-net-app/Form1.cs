@@ -173,10 +173,12 @@ namespace lightbot_net_app
         private void button1_Click(object sender, EventArgs e)
         {
             /// stop
-            if (pubsubThread != null && pubsubThread.IsAlive)
+            if (redisPubSub != null)
             {
                 logEvent("Stopping LightBot!",true);
-                pubsubThread.Interrupt();
+                redisPubSub.Stop();
+                redisPubSub = null;
+                pubsubThread = null;
             }
         }
 
