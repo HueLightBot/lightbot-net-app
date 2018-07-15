@@ -51,6 +51,7 @@ namespace lightbot_net_app
             checkBox8.Checked = Properties.Settings.Default.colorloopSubs;
 
             /// int Textboxes
+            textBox1.Text = Properties.Settings.Default.channel.ToString();
             textBox2.Text = Properties.Settings.Default.cheerFloor.ToString();
             textBox3.Text = Properties.Settings.Default.largeCheerFloor.ToString();
             textBox4.Text = Properties.Settings.Default.offFloor.ToString();
@@ -151,6 +152,7 @@ namespace lightbot_net_app
             Properties.Settings.Default.colorloopSubs = checkBox8.Checked;
 
             /// int Textboxes
+            Properties.Settings.Default.channel = textBox1.Text;
             Properties.Settings.Default.cheerFloor = Int32.Parse(textBox2.Text);
             Properties.Settings.Default.largeCheerFloor = Int32.Parse(textBox3.Text);
             Properties.Settings.Default.offFloor = Int32.Parse(textBox4.Text);
