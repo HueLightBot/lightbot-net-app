@@ -24,3 +24,7 @@ A .NET App for managing Lightbot
 `!setlights #FF0000` - Forcefully sets the lights to a color. This can only be used by the users specified in the command permissions section.
 
 `!colorloop`         - Force the bulbs into a color loop for 30 seconds. This can only be used by the users specified in the command permissions section.
+
+## Support Requests
+
+If you need support with HueLightBot or just want to chat with other users come join us on discord: https://discord.gg/7KRch4J
