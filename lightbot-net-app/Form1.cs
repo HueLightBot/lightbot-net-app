@@ -10,6 +10,7 @@ using Q42.HueApi.ColorConverters;
 using Q42.HueApi.ColorConverters.Original;
 using ServiceStack.Redis;
 using Newtonsoft.Json;
+using AutoUpdaterDotNET;
 using System.Text.RegularExpressions;
 
 namespace lightbot_net_app
@@ -28,6 +29,9 @@ namespace lightbot_net_app
         public Form1()
         {
             InitializeComponent();
+            AutoUpdater.ShowRemindLaterButton = true;
+            AutoUpdater.ReportErrors = true;
+            AutoUpdater.Start(@"http://updates.huelightbot.com/updates/AutoUpdater.xml");
         }
 
         private void notifyIcon1_MouseDoubleClick(object sender, MouseEventArgs e)
