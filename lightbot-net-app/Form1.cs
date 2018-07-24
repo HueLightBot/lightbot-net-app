@@ -272,7 +272,15 @@ namespace lightbot_net_app
         {
             if (commandVO.message.Contains("!setlights"))
             {
-                if (commandVO.mod)
+                if (Properties.Settings.Default.channel == commandVO.nick)
+                {
+                    foreach (Match match in Regex.Matches(commandVO.message, @"#([0-9a-fA-F]{6})"))
+                    {
+                        if (!string.IsNullOrEmpty(match.Value))
+                            SetHexColor(match.Value);
+                    }
+                }
+                else if (commandVO.mod)
                 {
                     if (Properties.Settings.Default.setlightsMods)
                     {
@@ -301,7 +309,11 @@ namespace lightbot_net_app
         {
             if (commandVO.message.Contains("!colorloop"))
             {
-                if (commandVO.mod)
+                if (Properties.Settings.Default.channel == commandVO.nick)
+                {
+                    DoColorLoop();
+                }
+                else if (commandVO.mod)
                 {
                     if (Properties.Settings.Default.colorloopMods)
                     {

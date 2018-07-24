@@ -640,6 +640,10 @@
             this.button4.UseVisualStyleBackColor = true;
             this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
+            // cheerfloorTip
+            // 
+            this.cheerfloorTip.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info;
+            // 
             // comboBox6
             // 
             this.comboBox6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
