@@ -687,6 +687,8 @@ namespace lightbot_net_app
     {
         public string tier { get; set; }
         public string nick { get; set; }
+        public string gift { get; set; }
+        public string mysterygift { get; set; }
         public string message { get; set; }
         public string type { get; set; }
     }

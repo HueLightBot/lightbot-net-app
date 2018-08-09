@@ -47,38 +47,15 @@
             this.label1 = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.tier3ColorBox = new System.Windows.Forms.CheckBox();
-            this.tier2SubComboBox = new System.Windows.Forms.CheckBox();
-            this.tier1subColorCheckBox = new System.Windows.Forms.CheckBox();
-            this.primeSubColorBox = new System.Windows.Forms.CheckBox();
-            this.checkBox8 = new System.Windows.Forms.CheckBox();
-            this.checkBox7 = new System.Windows.Forms.CheckBox();
-            this.label15 = new System.Windows.Forms.Label();
-            this.checkBox6 = new System.Windows.Forms.CheckBox();
-            this.checkBox5 = new System.Windows.Forms.CheckBox();
-            this.label14 = new System.Windows.Forms.Label();
-            this.label13 = new System.Windows.Forms.Label();
-            this.comboBox5 = new System.Windows.Forms.ComboBox();
-            this.comboBox4 = new System.Windows.Forms.ComboBox();
-            this.comboBox3 = new System.Windows.Forms.ComboBox();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
-            this.label10 = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
-            this.checkBox4 = new System.Windows.Forms.CheckBox();
-            this.textBox5 = new System.Windows.Forms.TextBox();
-            this.textBox4 = new System.Windows.Forms.TextBox();
+            this.textBox2 = new System.Windows.Forms.MaskedTextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.checkBox3 = new System.Windows.Forms.CheckBox();
             this.label4 = new System.Windows.Forms.Label();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.checkBox2 = new System.Windows.Forms.CheckBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.button4 = new System.Windows.Forms.Button();
             this.cheerfloorTip = new System.Windows.Forms.ToolTip(this.components);
@@ -91,9 +68,35 @@
             this.settingsTabControl = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.tier3ColorBox = new System.Windows.Forms.CheckBox();
+            this.tier2SubComboBox = new System.Windows.Forms.CheckBox();
+            this.tier1subColorCheckBox = new System.Windows.Forms.CheckBox();
+            this.primeSubColorBox = new System.Windows.Forms.CheckBox();
+            this.comboBox5 = new System.Windows.Forms.ComboBox();
+            this.comboBox4 = new System.Windows.Forms.ComboBox();
+            this.comboBox3 = new System.Windows.Forms.ComboBox();
+            this.comboBox2 = new System.Windows.Forms.ComboBox();
+            this.label10 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.checkBox4 = new System.Windows.Forms.CheckBox();
+            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.checkBox8 = new System.Windows.Forms.CheckBox();
+            this.checkBox7 = new System.Windows.Forms.CheckBox();
+            this.label15 = new System.Windows.Forms.Label();
+            this.checkBox6 = new System.Windows.Forms.CheckBox();
+            this.checkBox5 = new System.Windows.Forms.CheckBox();
+            this.label14 = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
+            this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.label19 = new System.Windows.Forms.Label();
             this.colorLoopDurationUpDown = new System.Windows.Forms.NumericUpDown();
-            this.label17 = new System.Windows.Forms.Label();
-            this.label16 = new System.Windows.Forms.Label();
+            this.label20 = new System.Windows.Forms.Label();
+            this.label21 = new System.Windows.Forms.Label();
+            this.textBox3 = new System.Windows.Forms.MaskedTextBox();
+            this.textBox4 = new System.Windows.Forms.MaskedTextBox();
+            this.textBox5 = new System.Windows.Forms.MaskedTextBox();
             this.panel1.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -101,6 +104,8 @@
             this.settingsTabControl.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
+            this.tabPage3.SuspendLayout();
+            this.tabPage4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.colorLoopDurationUpDown)).BeginInit();
             this.SuspendLayout();
             // 
@@ -258,269 +263,33 @@
             // panel2
             // 
             this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel2.Controls.Add(this.tier3ColorBox);
-            this.panel2.Controls.Add(this.tier2SubComboBox);
-            this.panel2.Controls.Add(this.tier1subColorCheckBox);
-            this.panel2.Controls.Add(this.primeSubColorBox);
-            this.panel2.Controls.Add(this.checkBox8);
-            this.panel2.Controls.Add(this.checkBox7);
-            this.panel2.Controls.Add(this.label15);
-            this.panel2.Controls.Add(this.checkBox6);
-            this.panel2.Controls.Add(this.checkBox5);
-            this.panel2.Controls.Add(this.label14);
-            this.panel2.Controls.Add(this.label13);
-            this.panel2.Controls.Add(this.comboBox5);
-            this.panel2.Controls.Add(this.comboBox4);
-            this.panel2.Controls.Add(this.comboBox3);
-            this.panel2.Controls.Add(this.comboBox2);
-            this.panel2.Controls.Add(this.label10);
-            this.panel2.Controls.Add(this.label9);
-            this.panel2.Controls.Add(this.label8);
-            this.panel2.Controls.Add(this.label7);
-            this.panel2.Controls.Add(this.checkBox4);
             this.panel2.Controls.Add(this.textBox5);
             this.panel2.Controls.Add(this.textBox4);
+            this.panel2.Controls.Add(this.textBox3);
+            this.panel2.Controls.Add(this.textBox2);
             this.panel2.Controls.Add(this.label6);
             this.panel2.Controls.Add(this.label5);
             this.panel2.Controls.Add(this.checkBox3);
             this.panel2.Controls.Add(this.label4);
             this.panel2.Controls.Add(this.comboBox1);
-            this.panel2.Controls.Add(this.textBox3);
             this.panel2.Controls.Add(this.label3);
             this.panel2.Controls.Add(this.checkBox2);
             this.panel2.Controls.Add(this.label2);
-            this.panel2.Controls.Add(this.textBox2);
             this.panel2.Controls.Add(this.checkBox1);
             this.panel2.Location = new System.Drawing.Point(6, 6);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(347, 396);
             this.panel2.TabIndex = 6;
             // 
-            // tier3ColorBox
+            // textBox2
             // 
-            this.tier3ColorBox.AutoSize = true;
-            this.tier3ColorBox.Location = new System.Drawing.Point(188, 302);
-            this.tier3ColorBox.Name = "tier3ColorBox";
-            this.tier3ColorBox.Size = new System.Drawing.Size(116, 17);
-            this.tier3ColorBox.TabIndex = 32;
-            this.tier3ColorBox.Text = "Can Change Lights";
-            this.tier3ColorBox.UseVisualStyleBackColor = true;
-            // 
-            // tier2SubComboBox
-            // 
-            this.tier2SubComboBox.AutoSize = true;
-            this.tier2SubComboBox.Location = new System.Drawing.Point(188, 276);
-            this.tier2SubComboBox.Name = "tier2SubComboBox";
-            this.tier2SubComboBox.Size = new System.Drawing.Size(116, 17);
-            this.tier2SubComboBox.TabIndex = 31;
-            this.tier2SubComboBox.Text = "Can Change Lights";
-            this.tier2SubComboBox.UseVisualStyleBackColor = true;
-            // 
-            // tier1subColorCheckBox
-            // 
-            this.tier1subColorCheckBox.AutoSize = true;
-            this.tier1subColorCheckBox.Location = new System.Drawing.Point(188, 250);
-            this.tier1subColorCheckBox.Name = "tier1subColorCheckBox";
-            this.tier1subColorCheckBox.Size = new System.Drawing.Size(116, 17);
-            this.tier1subColorCheckBox.TabIndex = 31;
-            this.tier1subColorCheckBox.Text = "Can Change Lights";
-            this.tier1subColorCheckBox.UseVisualStyleBackColor = true;
-            // 
-            // primeSubColorBox
-            // 
-            this.primeSubColorBox.AutoSize = true;
-            this.primeSubColorBox.Location = new System.Drawing.Point(189, 222);
-            this.primeSubColorBox.Name = "primeSubColorBox";
-            this.primeSubColorBox.Size = new System.Drawing.Size(116, 17);
-            this.primeSubColorBox.TabIndex = 30;
-            this.primeSubColorBox.Text = "Can Change Lights";
-            this.primeSubColorBox.UseVisualStyleBackColor = true;
-            // 
-            // checkBox8
-            // 
-            this.checkBox8.AutoSize = true;
-            this.checkBox8.Location = new System.Drawing.Point(132, 368);
-            this.checkBox8.Name = "checkBox8";
-            this.checkBox8.Size = new System.Drawing.Size(50, 17);
-            this.checkBox8.TabIndex = 29;
-            this.checkBox8.Text = "Subs";
-            this.checkBox8.UseVisualStyleBackColor = true;
-            // 
-            // checkBox7
-            // 
-            this.checkBox7.AutoSize = true;
-            this.checkBox7.Location = new System.Drawing.Point(80, 368);
-            this.checkBox7.Name = "checkBox7";
-            this.checkBox7.Size = new System.Drawing.Size(52, 17);
-            this.checkBox7.TabIndex = 28;
-            this.checkBox7.Text = "Mods";
-            this.checkBox7.UseVisualStyleBackColor = true;
-            // 
-            // label15
-            // 
-            this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(25, 368);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(53, 13);
-            this.label15.TabIndex = 27;
-            this.label15.Text = "!colorloop";
-            // 
-            // checkBox6
-            // 
-            this.checkBox6.AutoSize = true;
-            this.checkBox6.Location = new System.Drawing.Point(132, 345);
-            this.checkBox6.Name = "checkBox6";
-            this.checkBox6.Size = new System.Drawing.Size(50, 17);
-            this.checkBox6.TabIndex = 26;
-            this.checkBox6.Text = "Subs";
-            this.checkBox6.UseVisualStyleBackColor = true;
-            // 
-            // checkBox5
-            // 
-            this.checkBox5.AutoSize = true;
-            this.checkBox5.Location = new System.Drawing.Point(80, 345);
-            this.checkBox5.Name = "checkBox5";
-            this.checkBox5.Size = new System.Drawing.Size(52, 17);
-            this.checkBox5.TabIndex = 25;
-            this.checkBox5.Text = "Mods";
-            this.checkBox5.UseVisualStyleBackColor = true;
-            // 
-            // label14
-            // 
-            this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(26, 346);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(48, 13);
-            this.label14.TabIndex = 24;
-            this.label14.Text = "!setlights";
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(4, 323);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(115, 13);
-            this.label13.TabIndex = 23;
-            this.label13.Text = "Command Permissions:";
-            // 
-            // comboBox5
-            // 
-            this.comboBox5.FormattingEnabled = true;
-            this.comboBox5.Items.AddRange(new object[] {
-            "None",
-            "Loop",
-            "Blink"});
-            this.comboBox5.Location = new System.Drawing.Point(120, 298);
-            this.comboBox5.Name = "comboBox5";
-            this.comboBox5.Size = new System.Drawing.Size(62, 21);
-            this.comboBox5.TabIndex = 22;
-            this.comboBox5.Text = "None";
-            // 
-            // comboBox4
-            // 
-            this.comboBox4.FormattingEnabled = true;
-            this.comboBox4.Items.AddRange(new object[] {
-            "None",
-            "Loop",
-            "Blink"});
-            this.comboBox4.Location = new System.Drawing.Point(120, 272);
-            this.comboBox4.Name = "comboBox4";
-            this.comboBox4.Size = new System.Drawing.Size(62, 21);
-            this.comboBox4.TabIndex = 21;
-            this.comboBox4.Text = "None";
-            // 
-            // comboBox3
-            // 
-            this.comboBox3.FormattingEnabled = true;
-            this.comboBox3.Items.AddRange(new object[] {
-            "None",
-            "Loop",
-            "Blink"});
-            this.comboBox3.Location = new System.Drawing.Point(120, 246);
-            this.comboBox3.Name = "comboBox3";
-            this.comboBox3.Size = new System.Drawing.Size(62, 21);
-            this.comboBox3.TabIndex = 20;
-            this.comboBox3.Text = "None";
-            // 
-            // comboBox2
-            // 
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Items.AddRange(new object[] {
-            "None",
-            "Loop",
-            "Blink"});
-            this.comboBox2.Location = new System.Drawing.Point(120, 219);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(62, 21);
-            this.comboBox2.TabIndex = 19;
-            this.comboBox2.Text = "None";
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(26, 301);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(89, 13);
-            this.label10.TabIndex = 18;
-            this.label10.Text = "Tier 3 Sub Action";
-            this.label10.Click += new System.EventHandler(this.label10_Click);
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(26, 275);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(89, 13);
-            this.label9.TabIndex = 17;
-            this.label9.Text = "Tier 2 Sub Action";
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(26, 249);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(89, 13);
-            this.label8.TabIndex = 16;
-            this.label8.Text = "Tier 1 Sub Action";
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(26, 222);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(88, 13);
-            this.label7.TabIndex = 15;
-            this.label7.Text = "Prime Sub Action";
-            // 
-            // checkBox4
-            // 
-            this.checkBox4.AutoSize = true;
-            this.checkBox4.Location = new System.Drawing.Point(4, 196);
-            this.checkBox4.Name = "checkBox4";
-            this.checkBox4.Size = new System.Drawing.Size(86, 17);
-            this.checkBox4.TabIndex = 14;
-            this.checkBox4.Text = "Enable Subs";
-            this.checkBox4.UseVisualStyleBackColor = true;
-            // 
-            // textBox5
-            // 
-            this.textBox5.Location = new System.Drawing.Point(108, 171);
-            this.textBox5.MaxLength = 6;
-            this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(53, 20);
-            this.textBox5.TabIndex = 13;
-            this.textBox5.Text = "1000";
-            this.cheerfloorTip.SetToolTip(this.textBox5, "Minimum number of bits to turn the lights on");
-            // 
-            // textBox4
-            // 
-            this.textBox4.Location = new System.Drawing.Point(108, 144);
-            this.textBox4.MaxLength = 6;
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(53, 20);
-            this.textBox4.TabIndex = 12;
-            this.textBox4.Text = "5000";
-            this.cheerfloorTip.SetToolTip(this.textBox4, "Minimum number of bits to turn the lights off");
+            this.textBox2.Location = new System.Drawing.Point(92, 26);
+            this.textBox2.Mask = "000000";
+            this.textBox2.Name = "textBox2";
+            this.textBox2.Size = new System.Drawing.Size(51, 20);
+            this.textBox2.TabIndex = 33;
+            this.textBox2.Text = "200";
+            this.textBox2.ValidatingType = typeof(int);
             // 
             // label6
             // 
@@ -571,16 +340,6 @@
             this.comboBox1.TabIndex = 7;
             this.comboBox1.Text = "None";
             // 
-            // textBox3
-            // 
-            this.textBox3.Location = new System.Drawing.Point(149, 73);
-            this.textBox3.MaxLength = 6;
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(52, 20);
-            this.textBox3.TabIndex = 6;
-            this.textBox3.Text = "1000";
-            this.cheerfloorTip.SetToolTip(this.textBox3, "Minimum number of bits before the selected action will occur");
-            // 
             // label3
             // 
             this.label3.AutoSize = true;
@@ -608,16 +367,6 @@
             this.label2.Size = new System.Drawing.Size(61, 13);
             this.label2.TabIndex = 3;
             this.label2.Text = "Cheer Floor";
-            // 
-            // textBox2
-            // 
-            this.textBox2.Location = new System.Drawing.Point(92, 26);
-            this.textBox2.MaxLength = 6;
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(51, 20);
-            this.textBox2.TabIndex = 2;
-            this.textBox2.Text = "200";
-            this.cheerfloorTip.SetToolTip(this.textBox2, "Minimum number of bits before you can change the color of the lights");
             // 
             // checkBox1
             // 
@@ -692,6 +441,8 @@
             // 
             this.settingsTabControl.Controls.Add(this.tabPage1);
             this.settingsTabControl.Controls.Add(this.tabPage2);
+            this.settingsTabControl.Controls.Add(this.tabPage3);
+            this.settingsTabControl.Controls.Add(this.tabPage4);
             this.settingsTabControl.Location = new System.Drawing.Point(16, 36);
             this.settingsTabControl.Name = "settingsTabControl";
             this.settingsTabControl.SelectedIndex = 0;
@@ -706,25 +457,280 @@
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage1.Size = new System.Drawing.Size(351, 400);
             this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "Twitch Settings";
+            this.tabPage1.Text = "Cheer Settings";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
             // tabPage2
             // 
-            this.tabPage2.Controls.Add(this.colorLoopDurationUpDown);
-            this.tabPage2.Controls.Add(this.label17);
-            this.tabPage2.Controls.Add(this.label16);
+            this.tabPage2.Controls.Add(this.tier3ColorBox);
+            this.tabPage2.Controls.Add(this.tier2SubComboBox);
+            this.tabPage2.Controls.Add(this.tier1subColorCheckBox);
+            this.tabPage2.Controls.Add(this.primeSubColorBox);
+            this.tabPage2.Controls.Add(this.comboBox5);
+            this.tabPage2.Controls.Add(this.comboBox4);
+            this.tabPage2.Controls.Add(this.comboBox3);
+            this.tabPage2.Controls.Add(this.comboBox2);
+            this.tabPage2.Controls.Add(this.label10);
+            this.tabPage2.Controls.Add(this.label9);
+            this.tabPage2.Controls.Add(this.label8);
+            this.tabPage2.Controls.Add(this.label7);
+            this.tabPage2.Controls.Add(this.checkBox4);
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage2.Size = new System.Drawing.Size(351, 400);
             this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "Light Settings";
+            this.tabPage2.Text = "Sub Settings";
             this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // tier3ColorBox
+            // 
+            this.tier3ColorBox.AutoSize = true;
+            this.tier3ColorBox.Location = new System.Drawing.Point(190, 112);
+            this.tier3ColorBox.Name = "tier3ColorBox";
+            this.tier3ColorBox.Size = new System.Drawing.Size(116, 17);
+            this.tier3ColorBox.TabIndex = 45;
+            this.tier3ColorBox.Text = "Can Change Lights";
+            this.tier3ColorBox.UseVisualStyleBackColor = true;
+            // 
+            // tier2SubComboBox
+            // 
+            this.tier2SubComboBox.AutoSize = true;
+            this.tier2SubComboBox.Location = new System.Drawing.Point(190, 86);
+            this.tier2SubComboBox.Name = "tier2SubComboBox";
+            this.tier2SubComboBox.Size = new System.Drawing.Size(116, 17);
+            this.tier2SubComboBox.TabIndex = 43;
+            this.tier2SubComboBox.Text = "Can Change Lights";
+            this.tier2SubComboBox.UseVisualStyleBackColor = true;
+            // 
+            // tier1subColorCheckBox
+            // 
+            this.tier1subColorCheckBox.AutoSize = true;
+            this.tier1subColorCheckBox.Location = new System.Drawing.Point(190, 60);
+            this.tier1subColorCheckBox.Name = "tier1subColorCheckBox";
+            this.tier1subColorCheckBox.Size = new System.Drawing.Size(116, 17);
+            this.tier1subColorCheckBox.TabIndex = 44;
+            this.tier1subColorCheckBox.Text = "Can Change Lights";
+            this.tier1subColorCheckBox.UseVisualStyleBackColor = true;
+            // 
+            // primeSubColorBox
+            // 
+            this.primeSubColorBox.AutoSize = true;
+            this.primeSubColorBox.Location = new System.Drawing.Point(191, 32);
+            this.primeSubColorBox.Name = "primeSubColorBox";
+            this.primeSubColorBox.Size = new System.Drawing.Size(116, 17);
+            this.primeSubColorBox.TabIndex = 42;
+            this.primeSubColorBox.Text = "Can Change Lights";
+            this.primeSubColorBox.UseVisualStyleBackColor = true;
+            // 
+            // comboBox5
+            // 
+            this.comboBox5.FormattingEnabled = true;
+            this.comboBox5.Items.AddRange(new object[] {
+            "None",
+            "Loop",
+            "Blink"});
+            this.comboBox5.Location = new System.Drawing.Point(122, 108);
+            this.comboBox5.Name = "comboBox5";
+            this.comboBox5.Size = new System.Drawing.Size(62, 21);
+            this.comboBox5.TabIndex = 41;
+            this.comboBox5.Text = "None";
+            // 
+            // comboBox4
+            // 
+            this.comboBox4.FormattingEnabled = true;
+            this.comboBox4.Items.AddRange(new object[] {
+            "None",
+            "Loop",
+            "Blink"});
+            this.comboBox4.Location = new System.Drawing.Point(122, 82);
+            this.comboBox4.Name = "comboBox4";
+            this.comboBox4.Size = new System.Drawing.Size(62, 21);
+            this.comboBox4.TabIndex = 40;
+            this.comboBox4.Text = "None";
+            // 
+            // comboBox3
+            // 
+            this.comboBox3.FormattingEnabled = true;
+            this.comboBox3.Items.AddRange(new object[] {
+            "None",
+            "Loop",
+            "Blink"});
+            this.comboBox3.Location = new System.Drawing.Point(122, 56);
+            this.comboBox3.Name = "comboBox3";
+            this.comboBox3.Size = new System.Drawing.Size(62, 21);
+            this.comboBox3.TabIndex = 39;
+            this.comboBox3.Text = "None";
+            // 
+            // comboBox2
+            // 
+            this.comboBox2.FormattingEnabled = true;
+            this.comboBox2.Items.AddRange(new object[] {
+            "None",
+            "Loop",
+            "Blink"});
+            this.comboBox2.Location = new System.Drawing.Point(122, 29);
+            this.comboBox2.Name = "comboBox2";
+            this.comboBox2.Size = new System.Drawing.Size(62, 21);
+            this.comboBox2.TabIndex = 38;
+            this.comboBox2.Text = "None";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(28, 111);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(89, 13);
+            this.label10.TabIndex = 37;
+            this.label10.Text = "Tier 3 Sub Action";
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(28, 85);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(89, 13);
+            this.label9.TabIndex = 36;
+            this.label9.Text = "Tier 2 Sub Action";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(28, 59);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(89, 13);
+            this.label8.TabIndex = 35;
+            this.label8.Text = "Tier 1 Sub Action";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(28, 32);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(88, 13);
+            this.label7.TabIndex = 34;
+            this.label7.Text = "Prime Sub Action";
+            // 
+            // checkBox4
+            // 
+            this.checkBox4.AutoSize = true;
+            this.checkBox4.Location = new System.Drawing.Point(6, 6);
+            this.checkBox4.Name = "checkBox4";
+            this.checkBox4.Size = new System.Drawing.Size(86, 17);
+            this.checkBox4.TabIndex = 33;
+            this.checkBox4.Text = "Enable Subs";
+            this.checkBox4.UseVisualStyleBackColor = true;
+            // 
+            // tabPage3
+            // 
+            this.tabPage3.Controls.Add(this.checkBox8);
+            this.tabPage3.Controls.Add(this.checkBox7);
+            this.tabPage3.Controls.Add(this.label15);
+            this.tabPage3.Controls.Add(this.checkBox6);
+            this.tabPage3.Controls.Add(this.checkBox5);
+            this.tabPage3.Controls.Add(this.label14);
+            this.tabPage3.Controls.Add(this.label13);
+            this.tabPage3.Location = new System.Drawing.Point(4, 22);
+            this.tabPage3.Name = "tabPage3";
+            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage3.Size = new System.Drawing.Size(351, 400);
+            this.tabPage3.TabIndex = 2;
+            this.tabPage3.Text = "Permissions Settings";
+            this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // checkBox8
+            // 
+            this.checkBox8.AutoSize = true;
+            this.checkBox8.Location = new System.Drawing.Point(134, 53);
+            this.checkBox8.Name = "checkBox8";
+            this.checkBox8.Size = new System.Drawing.Size(50, 17);
+            this.checkBox8.TabIndex = 36;
+            this.checkBox8.Text = "Subs";
+            this.checkBox8.UseVisualStyleBackColor = true;
+            // 
+            // checkBox7
+            // 
+            this.checkBox7.AutoSize = true;
+            this.checkBox7.Location = new System.Drawing.Point(82, 53);
+            this.checkBox7.Name = "checkBox7";
+            this.checkBox7.Size = new System.Drawing.Size(52, 17);
+            this.checkBox7.TabIndex = 35;
+            this.checkBox7.Text = "Mods";
+            this.checkBox7.UseVisualStyleBackColor = true;
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(27, 53);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(53, 13);
+            this.label15.TabIndex = 34;
+            this.label15.Text = "!colorloop";
+            // 
+            // checkBox6
+            // 
+            this.checkBox6.AutoSize = true;
+            this.checkBox6.Location = new System.Drawing.Point(134, 30);
+            this.checkBox6.Name = "checkBox6";
+            this.checkBox6.Size = new System.Drawing.Size(50, 17);
+            this.checkBox6.TabIndex = 33;
+            this.checkBox6.Text = "Subs";
+            this.checkBox6.UseVisualStyleBackColor = true;
+            // 
+            // checkBox5
+            // 
+            this.checkBox5.AutoSize = true;
+            this.checkBox5.Location = new System.Drawing.Point(82, 30);
+            this.checkBox5.Name = "checkBox5";
+            this.checkBox5.Size = new System.Drawing.Size(52, 17);
+            this.checkBox5.TabIndex = 32;
+            this.checkBox5.Text = "Mods";
+            this.checkBox5.UseVisualStyleBackColor = true;
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(28, 31);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(48, 13);
+            this.label14.TabIndex = 31;
+            this.label14.Text = "!setlights";
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(6, 8);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(115, 13);
+            this.label13.TabIndex = 30;
+            this.label13.Text = "Command Permissions:";
+            // 
+            // tabPage4
+            // 
+            this.tabPage4.Controls.Add(this.label19);
+            this.tabPage4.Controls.Add(this.colorLoopDurationUpDown);
+            this.tabPage4.Controls.Add(this.label20);
+            this.tabPage4.Controls.Add(this.label21);
+            this.tabPage4.Location = new System.Drawing.Point(4, 22);
+            this.tabPage4.Name = "tabPage4";
+            this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage4.Size = new System.Drawing.Size(351, 400);
+            this.tabPage4.TabIndex = 3;
+            this.tabPage4.Text = "Light Settings";
+            this.tabPage4.UseVisualStyleBackColor = true;
+            // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.Location = new System.Drawing.Point(6, 8);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(78, 13);
+            this.label19.TabIndex = 11;
+            this.label19.Text = "Global Settings";
             // 
             // colorLoopDurationUpDown
             // 
-            this.colorLoopDurationUpDown.Location = new System.Drawing.Point(167, 20);
+            this.colorLoopDurationUpDown.Location = new System.Drawing.Point(189, 41);
             this.colorLoopDurationUpDown.Maximum = new decimal(new int[] {
             99999,
             0,
@@ -737,30 +743,59 @@
             0});
             this.colorLoopDurationUpDown.Name = "colorLoopDurationUpDown";
             this.colorLoopDurationUpDown.Size = new System.Drawing.Size(56, 20);
-            this.colorLoopDurationUpDown.TabIndex = 2;
+            this.colorLoopDurationUpDown.TabIndex = 10;
             this.colorLoopDurationUpDown.Value = new decimal(new int[] {
             20,
             0,
             0,
             0});
             // 
-            // label17
+            // label20
             // 
-            this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(43, 22);
-            this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(113, 13);
-            this.label17.TabIndex = 1;
-            this.label17.Text = "Duration (In Seconds):";
+            this.label20.AutoSize = true;
+            this.label20.Location = new System.Drawing.Point(65, 43);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(113, 13);
+            this.label20.TabIndex = 9;
+            this.label20.Text = "Duration (In Seconds):";
             // 
-            // label16
+            // label21
             // 
-            this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(7, 7);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(58, 13);
-            this.label16.TabIndex = 0;
-            this.label16.Text = "Color Loop";
+            this.label21.AutoSize = true;
+            this.label21.Location = new System.Drawing.Point(29, 27);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(58, 13);
+            this.label21.TabIndex = 8;
+            this.label21.Text = "Color Loop";
+            // 
+            // textBox3
+            // 
+            this.textBox3.Location = new System.Drawing.Point(149, 73);
+            this.textBox3.Mask = "000000";
+            this.textBox3.Name = "textBox3";
+            this.textBox3.Size = new System.Drawing.Size(52, 20);
+            this.textBox3.TabIndex = 34;
+            this.textBox3.Text = "1000";
+            this.textBox3.ValidatingType = typeof(int);
+            // 
+            // textBox4
+            // 
+            this.textBox4.Location = new System.Drawing.Point(108, 144);
+            this.textBox4.Mask = "000000";
+            this.textBox4.Name = "textBox4";
+            this.textBox4.Size = new System.Drawing.Size(52, 20);
+            this.textBox4.TabIndex = 35;
+            this.textBox4.Text = "5000";
+            this.textBox4.ValidatingType = typeof(int);
+            // 
+            // textBox5
+            // 
+            this.textBox5.Location = new System.Drawing.Point(108, 171);
+            this.textBox5.Mask = "000000";
+            this.textBox5.Name = "textBox5";
+            this.textBox5.Size = new System.Drawing.Size(52, 20);
+            this.textBox5.TabIndex = 36;
+            this.textBox5.Text = "1000";
             // 
             // Form1
             // 
@@ -794,6 +829,10 @@
             this.tabPage1.ResumeLayout(false);
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
+            this.tabPage3.ResumeLayout(false);
+            this.tabPage3.PerformLayout();
+            this.tabPage4.ResumeLayout(false);
+            this.tabPage4.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.colorLoopDurationUpDown)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -811,29 +850,16 @@
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.CheckBox checkBox1;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.ToolTip cheerfloorTip;
         private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.TextBox textBox3;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.CheckBox checkBox2;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox textBox5;
-        private System.Windows.Forms.TextBox textBox4;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.CheckBox checkBox3;
-        private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.CheckBox checkBox4;
-        private System.Windows.Forms.ComboBox comboBox5;
-        private System.Windows.Forms.ComboBox comboBox4;
-        private System.Windows.Forms.ComboBox comboBox3;
-        private System.Windows.Forms.ComboBox comboBox2;
         private System.Windows.Forms.ComboBox comboBox6;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
@@ -849,23 +875,39 @@
         private System.Windows.Forms.TextBox textBox6;
         private System.Windows.Forms.Label label12;
         private System.Diagnostics.EventLog eventLog1;
-        private System.Windows.Forms.CheckBox checkBox6;
-        private System.Windows.Forms.CheckBox checkBox5;
-        private System.Windows.Forms.Label label14;
-        private System.Windows.Forms.Label label13;
-        private System.Windows.Forms.CheckBox checkBox8;
-        private System.Windows.Forms.CheckBox checkBox7;
-        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.TabControl settingsTabControl;
+        private System.Windows.Forms.TabPage tabPage1;
+        private System.Windows.Forms.TabPage tabPage2;
+        private System.Windows.Forms.MaskedTextBox textBox2;
         private System.Windows.Forms.CheckBox tier3ColorBox;
         private System.Windows.Forms.CheckBox tier2SubComboBox;
         private System.Windows.Forms.CheckBox tier1subColorCheckBox;
         private System.Windows.Forms.CheckBox primeSubColorBox;
-        private System.Windows.Forms.TabControl settingsTabControl;
-        private System.Windows.Forms.TabPage tabPage1;
-        private System.Windows.Forms.TabPage tabPage2;
+        private System.Windows.Forms.ComboBox comboBox5;
+        private System.Windows.Forms.ComboBox comboBox4;
+        private System.Windows.Forms.ComboBox comboBox3;
+        private System.Windows.Forms.ComboBox comboBox2;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.CheckBox checkBox4;
+        private System.Windows.Forms.TabPage tabPage3;
+        private System.Windows.Forms.CheckBox checkBox8;
+        private System.Windows.Forms.CheckBox checkBox7;
+        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.CheckBox checkBox6;
+        private System.Windows.Forms.CheckBox checkBox5;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.TabPage tabPage4;
+        private System.Windows.Forms.Label label19;
         private System.Windows.Forms.NumericUpDown colorLoopDurationUpDown;
-        private System.Windows.Forms.Label label17;
-        private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.Label label20;
+        private System.Windows.Forms.Label label21;
+        private System.Windows.Forms.MaskedTextBox textBox5;
+        private System.Windows.Forms.MaskedTextBox textBox4;
+        private System.Windows.Forms.MaskedTextBox textBox3;
     }
 }
 
