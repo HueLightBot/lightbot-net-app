@@ -25,7 +25,6 @@ namespace lightbot_net_app
 
         private IRedisPubSubServer redisPubSub;
 
-
         public Form1()
         {
             InitializeComponent();
@@ -53,8 +52,14 @@ namespace lightbot_net_app
             checkBox6.Checked = Properties.Settings.Default.setlightsSubs;
             checkBox7.Checked = Properties.Settings.Default.colorloopMods;
             checkBox8.Checked = Properties.Settings.Default.colorloopSubs;
+            subGiftCheckBox.Checked = Properties.Settings.Default.giftSubs;
+            tier1subColorCheckBox.Checked = Properties.Settings.Default.Tier1ChangeColor;
+            tier2SubComboBox.Checked = Properties.Settings.Default.Tier2ChangeColor;
+            tier3ColorBox.Checked = Properties.Settings.Default.Tier3ChangeColor;
+            primeSubColorBox.Checked = Properties.Settings.Default.PrimeSubChangeColor;
+            raidCheckBox.Checked = Properties.Settings.Default.raids;
 
-            /// int Textboxes
+            /// Textboxes
             textBox1.Text = Properties.Settings.Default.channel.ToString();
             textBox2.Text = Properties.Settings.Default.cheerFloor.ToString();
             textBox3.Text = Properties.Settings.Default.largeCheerFloor.ToString();
@@ -67,11 +72,12 @@ namespace lightbot_net_app
             comboBox3.Text = Properties.Settings.Default.Tier1SubAction;
             comboBox4.Text = Properties.Settings.Default.Tier2SubAction;
             comboBox5.Text = Properties.Settings.Default.Tier3SubAction;
+            giftSubT1comboBox.Text = Properties.Settings.Default.giftSubT1;
+            giftSubT2comboBox.Text = Properties.Settings.Default.giftSubT2;
+            giftSubT3comboBox.Text = Properties.Settings.Default.giftSubT3;
+            raidActionComboBox.Text = Properties.Settings.Default.raidAction;
 
-            tier1subColorCheckBox.Checked = Properties.Settings.Default.Tier1ChangeColor;
-            tier2SubComboBox.Checked = Properties.Settings.Default.Tier2ChangeColor;
-            tier3ColorBox.Checked = Properties.Settings.Default.Tier3ChangeColor;
-            primeSubColorBox.Checked = Properties.Settings.Default.PrimeSubChangeColor;
+
             colorLoopDurationUpDown.Value = Properties.Settings.Default.colorLoopDuration;
             exitToolStripMenuItem.Click += new EventHandler(exitToolStripMenuItem_Click);
 
@@ -149,13 +155,19 @@ namespace lightbot_net_app
             Properties.Settings.Default.cheering = checkBox1.Checked;
             Properties.Settings.Default.largeCheer = checkBox2.Checked;
             Properties.Settings.Default.onOff = checkBox3.Checked;
+            Properties.Settings.Default.giftSubs = subGiftCheckBox.Checked;
             Properties.Settings.Default.subs = checkBox4.Checked;
             Properties.Settings.Default.setlightsMods = checkBox5.Checked;
             Properties.Settings.Default.setlightsSubs = checkBox6.Checked;
             Properties.Settings.Default.colorloopMods = checkBox7.Checked;
             Properties.Settings.Default.colorloopSubs = checkBox8.Checked;
+            Properties.Settings.Default.Tier1ChangeColor = tier1subColorCheckBox.Checked;
+            Properties.Settings.Default.Tier2ChangeColor = tier2SubComboBox.Checked;
+            Properties.Settings.Default.Tier3ChangeColor = tier3ColorBox.Checked;
+            Properties.Settings.Default.PrimeSubChangeColor = primeSubColorBox.Checked;
+            Properties.Settings.Default.raids = raidCheckBox.Checked;
 
-            /// int Textboxes
+            /// Textboxes
             Properties.Settings.Default.channel = textBox1.Text;
             Properties.Settings.Default.cheerFloor = Int32.Parse(textBox2.Text);
             Properties.Settings.Default.largeCheerFloor = Int32.Parse(textBox3.Text);
@@ -168,11 +180,12 @@ namespace lightbot_net_app
             Properties.Settings.Default.Tier1SubAction = comboBox3.Text;
             Properties.Settings.Default.Tier2SubAction = comboBox4.Text;
             Properties.Settings.Default.Tier3SubAction = comboBox5.Text;
-            Properties.Settings.Default.Tier1ChangeColor = tier1subColorCheckBox.Checked;
-            Properties.Settings.Default.Tier2ChangeColor = tier2SubComboBox.Checked;
-            Properties.Settings.Default.Tier3ChangeColor = tier3ColorBox.Checked;
-            Properties.Settings.Default.PrimeSubChangeColor = primeSubColorBox.Checked;
             Properties.Settings.Default.colorLoopDuration = colorLoopDurationUpDown.Value;
+            Properties.Settings.Default.giftSubT1 = giftSubT1comboBox.Text;
+            Properties.Settings.Default.giftSubT2 = giftSubT2comboBox.Text;
+            Properties.Settings.Default.giftSubT3 = giftSubT3comboBox.Text;
+            Properties.Settings.Default.raidAction = raidActionComboBox.Text;
+
             Properties.Settings.Default.Save();
         }
 
@@ -185,6 +198,7 @@ namespace lightbot_net_app
                 redisPubSub.Stop();
                 redisPubSub = null;
                 pubsubThread = null;
+                toolStripStatusLabel2.Text = "Disconnected";
             }
         }
 
@@ -196,6 +210,7 @@ namespace lightbot_net_app
                 logEvent("Starting LightBot!",true);
                 pubsubThread = (new Thread(() => pubsubRunner(client)));
                 pubsubThread.Start();
+                toolStripStatusLabel2.Text = "Connected";
             }
         }
 
@@ -233,7 +248,6 @@ namespace lightbot_net_app
 
         }
 
-
         private void HandleOnMessage(string channel, string msg)
         {
 
@@ -256,10 +270,32 @@ namespace lightbot_net_app
                 SubVO subVO = JsonConvert.DeserializeObject<SubVO>(msg);
                 HandleAction(subVO);
             }
+            else if (msg.Contains("\"type\":\"raid\""))
+            {
+                RaidVO raidVO = JsonConvert.DeserializeObject<RaidVO>(msg);
+                HandleAction(raidVO);
+            }
             else
             {
                 // wtf
             }
+        }
+
+        private void HandleAction(RaidVO raidVO)
+        {
+            if (Properties.Settings.Default.raids)
+            {
+                bool doColorLoop = false;
+                bool doBlink = false;
+
+                doColorLoop = Properties.Settings.Default.raidAction.ToLower() == "loop";
+                doBlink = Properties.Settings.Default.raidAction.ToLower() == "blink";
+
+                if (doColorLoop) DoColorLoop();
+                if (doBlink) DoBlink();
+            }
+
+            return;
         }
 
         private void HandleAction(CommandVO commandVO)
@@ -305,6 +341,7 @@ namespace lightbot_net_app
 
             }
         }
+
         private void HandleColorLoop(CommandVO commandVO)
         {
             if (commandVO.message.Contains("!colorloop"))
@@ -395,15 +432,51 @@ namespace lightbot_net_app
                     break;
             }
 
-            bool doColors = HandleSubAction(subTier);
-            if (doColors)
+            if (subVO.gift)
             {
-                foreach (Match match in Regex.Matches(subVO.message, @"#([0-9a-fA-F]{6})"))
+                if (Properties.Settings.Default.giftSubs)
                 {
-                    if (!string.IsNullOrEmpty(match.Value))
-                        SetHexColor(match.Value);
+                    HandleGiftSubAction(subTier);
                 }
             }
+            else
+            {
+                bool doColors = HandleSubAction(subTier);
+                if (doColors)
+                {
+                    foreach (Match match in Regex.Matches(subVO.message, @"#([0-9a-fA-F]{6})"))
+                    {
+                        if (!string.IsNullOrEmpty(match.Value))
+                            SetHexColor(match.Value);
+                    }
+                }
+            }
+        }
+
+        private void HandleGiftSubAction(SubTiers subTier)
+        {
+            bool doColorLoop = false;
+            bool doBlink = false;
+
+            if (subTier == SubTiers.Tier1)
+            {
+                doColorLoop = Properties.Settings.Default.giftSubT1.ToLower() == "loop";
+                doBlink = Properties.Settings.Default.giftSubT1.ToLower() == "blink";
+            }
+            else if (subTier == SubTiers.Tier2)
+            {
+                doColorLoop = Properties.Settings.Default.giftSubT2.ToLower() == "loop";
+                doBlink = Properties.Settings.Default.giftSubT2.ToLower() == "blink";
+            }
+            else if (subTier == SubTiers.Tier3)
+            {
+                doColorLoop = Properties.Settings.Default.giftSubT3.ToLower() == "loop";
+                doBlink = Properties.Settings.Default.giftSubT3.ToLower() == "blink";
+            }
+            if (doColorLoop) DoColorLoop();
+            if (doBlink) DoBlink();
+
+            return;
         }
 
         private bool HandleSubAction(SubTiers subTier)
@@ -438,11 +511,9 @@ namespace lightbot_net_app
                 doChangeColors = Properties.Settings.Default.PrimeSubChangeColor;
             }
 
-
             if (doColorLoop) DoColorLoop();
             if (doBlink) DoBlink();
             return doChangeColors;
-
 
         }
 
@@ -512,7 +583,8 @@ namespace lightbot_net_app
 
             client.SendCommandAsync(command, selectedGroup.Lights);
         }
-       private void contextMenuStrip1_Opening(object sender, CancelEventArgs e)
+
+        private void contextMenuStrip1_Opening(object sender, CancelEventArgs e)
         {
 
         }
@@ -655,7 +727,6 @@ namespace lightbot_net_app
 
         }
 
-
         private void exitToolStripMenuItem_Click_1(object sender, EventArgs e)
         {
             if (pubsubThread != null)
@@ -672,8 +743,18 @@ namespace lightbot_net_app
                 this.ShowDialog();
             }
         }
+
+        private void toolStripStatusLabel3_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.Start("https://discord.gg/7KRch4J");
+        }
     }
 
+    public class RaidVO
+    {
+        public string type { get; set; }
+        public int viewers { get; set; }
+    }
 
     public class CheerVO
     {
@@ -687,8 +768,8 @@ namespace lightbot_net_app
     {
         public string tier { get; set; }
         public string nick { get; set; }
-        public string gift { get; set; }
-        public string mysterygift { get; set; }
+        public bool gift { get; set; }
+        public bool mysterygift { get; set; }
         public string message { get; set; }
         public string type { get; set; }
     }
