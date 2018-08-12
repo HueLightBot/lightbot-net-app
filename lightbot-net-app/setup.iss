@@ -21,9 +21,9 @@ AppSupportURL={#MyAppURL}
 AppUpdatesURL={#MyAppURL}
 DefaultDirName={pf}\{#MyAppName}
 DisableProgramGroupPage=yes
-LicenseFile=C:\Users\aetar\OneDrive\Documents\Source\lightbot-net-app\LICENSE
+LicenseFile=..\LICENSE
 OutputBaseFilename=huelightbot-setup
-SetupIconFile=C:\Users\aetar\OneDrive\Documents\Source\lightbot-net-app\lightbot-net-app\lightbot_xIQ_icon.ico
+SetupIconFile=lightbot_xIQ_icon.ico
 Compression=lzma
 SolidCompression=yes
 
@@ -34,27 +34,27 @@ Name: "english"; MessagesFile: "compiler:Default.isl"
 Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked
 
 [Files]
-Source: "C:\Users\aetar\OneDrive\Documents\Source\lightbot-net-app\lightbot-net-app\bin\Release\HueLightBot.exe"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Users\aetar\OneDrive\Documents\Source\lightbot-net-app\lightbot-net-app\bin\Release\AutoUpdater.NET.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Users\aetar\OneDrive\Documents\Source\lightbot-net-app\lightbot-net-app\bin\Release\AutoUpdater.NET.pdb"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Users\aetar\OneDrive\Documents\Source\lightbot-net-app\lightbot-net-app\bin\Release\AutoUpdater.NET.xml"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Users\aetar\OneDrive\Documents\Source\lightbot-net-app\lightbot-net-app\bin\Release\HueLightBot.exe"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Users\aetar\OneDrive\Documents\Source\lightbot-net-app\lightbot-net-app\bin\Release\HueLightBot.exe.config"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Users\aetar\OneDrive\Documents\Source\lightbot-net-app\lightbot-net-app\bin\Release\HueLightBot.pdb"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Users\aetar\OneDrive\Documents\Source\lightbot-net-app\lightbot-net-app\bin\Release\Newtonsoft.Json.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Users\aetar\OneDrive\Documents\Source\lightbot-net-app\lightbot-net-app\bin\Release\Newtonsoft.Json.xml"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Users\aetar\OneDrive\Documents\Source\lightbot-net-app\lightbot-net-app\bin\Release\PubSub.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Users\aetar\OneDrive\Documents\Source\lightbot-net-app\lightbot-net-app\bin\Release\Q42.HueApi.ColorConverters.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Users\aetar\OneDrive\Documents\Source\lightbot-net-app\lightbot-net-app\bin\Release\Q42.HueApi.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Users\aetar\OneDrive\Documents\Source\lightbot-net-app\lightbot-net-app\bin\Release\ServiceStack.Common.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Users\aetar\OneDrive\Documents\Source\lightbot-net-app\lightbot-net-app\bin\Release\ServiceStack.Common.xml"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Users\aetar\OneDrive\Documents\Source\lightbot-net-app\lightbot-net-app\bin\Release\ServiceStack.Interfaces.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Users\aetar\OneDrive\Documents\Source\lightbot-net-app\lightbot-net-app\bin\Release\ServiceStack.Interfaces.xml"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Users\aetar\OneDrive\Documents\Source\lightbot-net-app\lightbot-net-app\bin\Release\ServiceStack.Redis.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Users\aetar\OneDrive\Documents\Source\lightbot-net-app\lightbot-net-app\bin\Release\ServiceStack.Redis.xml"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Users\aetar\OneDrive\Documents\Source\lightbot-net-app\lightbot-net-app\bin\Release\ServiceStack.Text.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Users\aetar\OneDrive\Documents\Source\lightbot-net-app\lightbot-net-app\bin\Release\ServiceStack.Text.xml"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Users\aetar\OneDrive\Documents\Source\lightbot-net-app\lightbot-net-app\bin\Release\System.Runtime.InteropServices.RuntimeInformation.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "bin\Release\HueLightBot.exe"; DestDir: "{app}"; Flags: ignoreversion
+Source: "bin\Release\AutoUpdater.NET.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "bin\Release\AutoUpdater.NET.pdb"; DestDir: "{app}"; Flags: ignoreversion
+Source: "bin\Release\AutoUpdater.NET.xml"; DestDir: "{app}"; Flags: ignoreversion
+Source: "bin\Release\HueLightBot.exe"; DestDir: "{app}"; Flags: ignoreversion
+Source: "bin\Release\HueLightBot.exe.config"; DestDir: "{app}"; Flags: ignoreversion
+Source: "bin\Release\HueLightBot.pdb"; DestDir: "{app}"; Flags: ignoreversion
+Source: "bin\Release\Newtonsoft.Json.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "bin\Release\Newtonsoft.Json.xml"; DestDir: "{app}"; Flags: ignoreversion
+Source: "bin\Release\PubSub.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "bin\Release\Q42.HueApi.ColorConverters.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "bin\Release\Q42.HueApi.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "bin\Release\ServiceStack.Common.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "bin\Release\ServiceStack.Common.xml"; DestDir: "{app}"; Flags: ignoreversion
+Source: "bin\Release\ServiceStack.Interfaces.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "bin\Release\ServiceStack.Interfaces.xml"; DestDir: "{app}"; Flags: ignoreversion
+Source: "bin\Release\ServiceStack.Redis.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "bin\Release\ServiceStack.Redis.xml"; DestDir: "{app}"; Flags: ignoreversion
+Source: "bin\Release\ServiceStack.Text.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "bin\Release\ServiceStack.Text.xml"; DestDir: "{app}"; Flags: ignoreversion
+Source: "bin\Release\System.Runtime.InteropServices.RuntimeInformation.dll"; DestDir: "{app}"; Flags: ignoreversion
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 
 [Icons]
