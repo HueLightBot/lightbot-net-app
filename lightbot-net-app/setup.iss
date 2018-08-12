@@ -2,7 +2,7 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "HueLightBot"
-#define MyAppVersion "2.0.2.0"
+#define MyAppVersion "2.0.3.0"
 #define MyAppPublisher "HueLightBot"
 #define MyAppURL "http://huelightbot.com/"
 #define MyAppExeName "HueLightBot.exe"
