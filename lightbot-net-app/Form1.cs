@@ -457,21 +457,25 @@ namespace lightbot_net_app
         {
             bool doColorLoop = false;
             bool doBlink = false;
+            bool doBlinkLoop = false;
 
             if (subTier == SubTiers.Tier1)
             {
                 doColorLoop = Properties.Settings.Default.giftSubT1.ToLower() == "loop";
                 doBlink = Properties.Settings.Default.giftSubT1.ToLower() == "blink";
+                doBlinkLoop = Properties.Settings.Default.giftSubT1.ToLower() == "blink+loop";
             }
             else if (subTier == SubTiers.Tier2)
             {
                 doColorLoop = Properties.Settings.Default.giftSubT2.ToLower() == "loop";
                 doBlink = Properties.Settings.Default.giftSubT2.ToLower() == "blink";
+                doBlinkLoop = Properties.Settings.Default.giftSubT2.ToLower() == "blink+loop";
             }
             else if (subTier == SubTiers.Tier3)
             {
                 doColorLoop = Properties.Settings.Default.giftSubT3.ToLower() == "loop";
                 doBlink = Properties.Settings.Default.giftSubT3.ToLower() == "blink";
+                doBlinkLoop = Properties.Settings.Default.giftSubT3.ToLower() == "blink+loop";
             }
             if (doColorLoop) DoColorLoop();
             if (doBlink) DoBlink();
@@ -484,37 +488,68 @@ namespace lightbot_net_app
 
             bool doColorLoop = false;
             bool doBlink = false;
+            bool doBlinkLoop = false;
             bool doChangeColors = false;
 
             if (subTier == SubTiers.Tier1)
             {
                 doColorLoop = Properties.Settings.Default.Tier1SubAction.ToLower() == "loop";
                 doBlink = Properties.Settings.Default.Tier1SubAction.ToLower() == "blink";
+                doBlinkLoop = Properties.Settings.Default.Tier1SubAction.ToLower() == "blink+loop";
                 doChangeColors = Properties.Settings.Default.Tier1ChangeColor;
             }
             else if (subTier == SubTiers.Tier2)
             {
                 doColorLoop = Properties.Settings.Default.Tier2SubAction.ToLower() == "loop";
                 doBlink = Properties.Settings.Default.Tier2SubAction.ToLower() == "blink";
+                doBlinkLoop = Properties.Settings.Default.Tier2SubAction.ToLower() == "blink+loop";
                 doChangeColors = Properties.Settings.Default.Tier2ChangeColor;
             }
             else if (subTier == SubTiers.Tier3)
             {
                 doColorLoop = Properties.Settings.Default.Tier3SubAction.ToLower() == "loop";
                 doBlink = Properties.Settings.Default.Tier3SubAction.ToLower() == "blink";
+                doBlinkLoop = Properties.Settings.Default.Tier3SubAction.ToLower() == "blink+loop";
                 doChangeColors = Properties.Settings.Default.Tier3ChangeColor;
             }
             else if (subTier == SubTiers.Prime)
             {
                 doColorLoop = Properties.Settings.Default.primeSubAction.ToLower() == "loop";
                 doBlink = Properties.Settings.Default.primeSubAction.ToLower() == "blink";
+                doBlinkLoop = Properties.Settings.Default.primeSubAction.ToLower() == "blink+loop";
                 doChangeColors = Properties.Settings.Default.PrimeSubChangeColor;
             }
 
             if (doColorLoop) DoColorLoop();
             if (doBlink) DoBlink();
+            if (doBlinkLoop) DoBlinkLoop();
             return doChangeColors;
 
+        }
+
+        private async void DoBlinkLoop()
+        {
+            if (await client.CheckConnection() == true)
+            {
+                var commandLoopOn = new LightCommand();
+                commandLoopOn.Effect = Effect.ColorLoop;
+                var commandLoopOff = new LightCommand();
+                commandLoopOff.Effect = Effect.None;
+                var commandBlink = new LightCommand();
+                commandBlink.Alert = Alert.Multiple;
+
+                Q42.HueApi.Models.Groups.Group selectedGroup = getSelectedGroup();
+
+                await client.SendCommandAsync(commandLoopOn, selectedGroup.Lights);
+                await client.SendCommandAsync(commandBlink, selectedGroup.Lights);
+
+                int loopDuration = Convert.ToInt32(Properties.Settings.Default.colorLoopDuration) * 1000;
+
+                Thread.Sleep(loopDuration);
+                await client.SendCommandAsync(commandLoopOff, selectedGroup.Lights);
+
+                logEvent("Doing a Color Looping blink", true);
+            }
         }
 
         private async void DoColorLoop()

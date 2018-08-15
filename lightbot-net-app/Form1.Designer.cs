@@ -894,7 +894,7 @@
             // 
             // colorLoopDurationUpDown
             // 
-            this.colorLoopDurationUpDown.Location = new System.Drawing.Point(189, 41);
+            this.colorLoopDurationUpDown.Location = new System.Drawing.Point(225, 40);
             this.colorLoopDurationUpDown.Maximum = new decimal(new int[] {
             99999,
             0,
@@ -917,20 +917,20 @@
             // label20
             // 
             this.label20.AutoSize = true;
-            this.label20.Location = new System.Drawing.Point(65, 43);
+            this.label20.Location = new System.Drawing.Point(52, 42);
             this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(113, 13);
+            this.label20.Size = new System.Drawing.Size(167, 13);
             this.label20.TabIndex = 9;
-            this.label20.Text = "Duration (In Seconds):";
+            this.label20.Text = "Color Loop Duration (In Seconds):";
             // 
             // label21
             // 
             this.label21.AutoSize = true;
-            this.label21.Location = new System.Drawing.Point(29, 27);
+            this.label21.Location = new System.Drawing.Point(29, 26);
             this.label21.Name = "label21";
-            this.label21.Size = new System.Drawing.Size(58, 13);
+            this.label21.Size = new System.Drawing.Size(33, 13);
             this.label21.TabIndex = 8;
-            this.label21.Text = "Color Loop";
+            this.label21.Text = "Alerts";
             // 
             // statusStrip1
             // 
